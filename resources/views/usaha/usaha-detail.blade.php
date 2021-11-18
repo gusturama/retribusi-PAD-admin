@@ -47,7 +47,7 @@
         <div class="card-body text-lg">
             {{-- foto usaha --}}
             <div class="foto-profil text-center mb-3">
-                <img src="dist/img/photo1.png" class="img-thumbnail rounded" alt="..." width="60%">
+                <img src="dist/img/photo1.png" class="img-thumbnail rounded" alt="..." width="30%">
                 <div class="strong text-center">Foto Usaha</div>
             </div>
             {{-- data profil --}}
@@ -88,7 +88,7 @@
             <hr>
             <strong></i> Foto Surat</strong>
             <p class="text-muted">
-                <img src="/img/sku.jpg" class="img-thumbnail rounded" alt="...">
+                <img src="/img/sku.jpg" class="img-thumbnail rounded" alt="..." width="40%">
             </p>
             <hr>
             <strong></i> Lokasi pada Peta</strong>

@@ -176,7 +176,7 @@
                             </li>
                             <li class="nav-header">Master Data</li>
                                 <li class="nav-item">
-                                    <a href="/usaha" class="nav-link {{  ($title === "Usaha") ? 'active' : '' }}">
+                                    <a href="/usaha" class="nav-link {{  ($title === "Usaha"| $title === "Detail Usaha" | $title === "Tambah Usaha"| $title === "Edit Usaha") ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-store"></i>
                                     <p>Usaha</p>
                                     </a>
