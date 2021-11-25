@@ -182,23 +182,23 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/iuran" class="nav-link {{  ($title === "Iuran") ? 'active' : '' }}">
+                                    <a href="/iuran" class="nav-link {{  ($title === "Iuran"| $title === "Detail Iuran" | $title === "Tambah Iuran"| $title === "Edit Iuran") ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-money-bill"></i>
                                     <p>Iuran</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/denda" class="nav-link {{  ($title === "Denda") ? 'active' : '' }}">
+                                    <a href="/denda" class="nav-link {{  ($title === "Usaha"|  $title === "Tambah Denda"| $title === "Edit Denda") ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-money-bill"></i>
                                     <p>Denda</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="/pembayaran-iuran" class="nav-link {{  ($title === "Pembayaran Iuran") ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-money-bill-wave"></i>
                                     <p>Pembayaran Iuran</p>
                                     </a>
-                                </li>
+                                </li> --}}
 
                             </li>
                             

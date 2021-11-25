@@ -105,9 +105,39 @@ Route::get('/iuran', function () {
     ]);
 });
 
+Route::get('/iuran-detail', function () {
+    return view('iuran/iuran-detail', [
+        "title" => "Detail Iuran"
+    ]);
+});
+
+Route::get('/iuran-tambah', function () {
+    return view('iuran/iuran-tambah', [
+        "title" => "Tambah Iuran"
+    ]);
+});
+
+Route::get('/iuran-edit', function () {
+    return view('iuran/iuran-edit', [
+        "title" => "Detail Iuran"
+    ]);
+});
+
 Route::get('/denda', function () {
     return view('denda/denda', [
         "title" => "Denda"
+    ]);
+});
+
+Route::get('/denda-tambah', function () {
+    return view('denda/denda-tambah', [
+        "title" => "Tambah Denda"
+    ]);
+});
+
+Route::get('/denda-edit', function () {
+    return view('denda/denda-edit', [
+        "title" => "Edit Denda"
     ]);
 });
 
