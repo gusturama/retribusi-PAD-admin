@@ -119,7 +119,7 @@ Route::get('/iuran-tambah', function () {
 
 Route::get('/iuran-edit', function () {
     return view('iuran/iuran-edit', [
-        "title" => "Detail Iuran"
+        "title" => "Edit Iuran"
     ]);
 });
 
@@ -141,14 +141,28 @@ Route::get('/denda-edit', function () {
     ]);
 });
 
-Route::get('/pembayaran-iuran', function () {
-    return view('pembayaran-iuran', [
-        "title" => "Pembayaran Iuran"
+Route::get('/transaksi', function () {
+    return view('transaksi/transaksi', [
+        "title" => "Transaksi"
     ]);
 });
 
+Route::get('/transaksi-tambah', function () {
+    return view('transaksi/transaksi-tambah', [
+        "title" => "Tambah Transaksi"
+    ]);
+});
 
+Route::get('/transaksi-edit', function () {
+    return view('transaksi/transaksi-edit', [
+        "title" => "Edit Transaksi"
+    ]);
+});
 
-
+Route::get('/transaksi-detail', function () {
+    return view('transaksi/transaksi-detail', [
+        "title" => "Detail Transaksi"
+    ]);
+});
 
 

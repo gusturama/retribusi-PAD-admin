@@ -188,20 +188,21 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/denda" class="nav-link {{  ($title === "Usaha"|  $title === "Tambah Denda"| $title === "Edit Denda") ? 'active' : '' }}">
+                                    <a href="/denda" class="nav-link {{  ($title === "Denda"|  $title === "Tambah Denda"| $title === "Edit Denda") ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-money-bill"></i>
                                     <p>Denda</p>
                                     </a>
                                 </li>
-                                {{-- <li class="nav-item">
-                                    <a href="/pembayaran-iuran" class="nav-link {{  ($title === "Pembayaran Iuran") ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-money-bill-wave"></i>
-                                    <p>Pembayaran Iuran</p>
-                                    </a>
-                                </li> --}}
-
                             </li>
-                            
+                            <li class="nav-item">
+                                <a href="/transaksi" class="nav-link {{  ($title === "Transaksi"|  $title === "Tambah Transaksi"| $title === "Edit Transaksi" | $title === "Detail Transaksi") ? 'active' : '' }}">
+                                <i class="fas fa-money-check"></i>
+                                <p>
+                                    Transaksi
+                                </p>
+                                </a>
+                            </li>
+
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->
