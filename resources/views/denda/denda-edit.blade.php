@@ -29,7 +29,7 @@
             <div class="col-md">
               <div class="form-group">
                   <label>Nominal Denda</label>
-                  <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Masukan nominal " required="required">
+                  <input type="number" class="form-control" id="exampleInputEmail1" value="10000" required="required">
                 </div>
           </div>
         </div>

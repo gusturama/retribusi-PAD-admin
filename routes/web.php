@@ -105,12 +105,6 @@ Route::get('/iuran', function () {
     ]);
 });
 
-Route::get('/iuran-detail', function () {
-    return view('iuran/iuran-detail', [
-        "title" => "Detail Iuran"
-    ]);
-});
-
 Route::get('/iuran-tambah', function () {
     return view('iuran/iuran-tambah', [
         "title" => "Tambah Iuran"

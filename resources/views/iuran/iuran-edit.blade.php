@@ -50,7 +50,7 @@
             <div class="col-md">
                 <div class="form-group">
                     <label>Nominal Iuran</label>
-                    <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Masukan nominal " required="required">
+                    <input type="text" class="form-control" id="exampleInputEmail1" value="50000" required="required">
                   </div>
             </div>
         </div>

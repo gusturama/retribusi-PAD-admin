@@ -20,9 +20,9 @@
                 <div class="form-group">
                     <label for="exampleSelectBorder">Skala Usaha</label>
                     <select class="custom-select form-control-border" id="exampleSelectBorder" required="required">
-                      <option disabled>Besar</option>
-                      <option disabled>Menengah</option>
-                      <option disabled>Kecil</option>
+                      <option >Besar</option>
+                      <option >Menengah</option>
+                      <option >Kecil</option>
                     </select>
                 </div>
             </div>
