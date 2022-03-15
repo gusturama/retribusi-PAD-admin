@@ -50,6 +50,10 @@
         </tbody>
         </table>
     </div>
+    @foreach ($transaction as $trans)
+    {{$trans->id}} - {{$trans->staff_id}}  <br>  
+    @endforeach
+    
     <!-- /.card-body -->
 </div>
 

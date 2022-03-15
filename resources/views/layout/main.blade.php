@@ -76,8 +76,8 @@
             >
                 <img
                     class="animation__shake"
-                    src="dist/img/AdminLTELogo.png"
-                    alt="AdminLTELogo"
+                    src="/img/logo.jpeg"
+                    alt="Logo"
                     height="60"
                     width="60"
                 />
@@ -120,8 +120,8 @@
                 <!-- Brand Logo -->
                 <a href="/" class="brand-link">
                     <img
-                        src="dist/img/AdminLTELogo.png"
-                        alt="AdminLTE Logo"
+                        src="/img/logo.jpeg"
+                        alt="Logo"
                         class="brand-image img-circle elevation-3"
                         style="opacity: 0.8"
                     />
@@ -131,18 +131,7 @@
                 <!-- Sidebar -->
                 <div class="sidebar">
                     <!-- Sidebar user panel (optional) -->
-                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                        <div class="image">
-                        <img
-                            src="dist/img/user2-160x160.jpg"
-                            class="img-circle elevation-2"
-                            alt="User Image"
-                        />
-                        </div>
-                        <div class="info">
-                        <a href="#" class="d-block">Nama Admin</a>
-                        </div>
-                    </div>
+                    
                     <!-- Sidebar Menu -->
                     <nav class="mt-2">
                         <ul
@@ -152,7 +141,30 @@
                             data-accordion="false"
                         >
                             <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+                        with font-awesome or any other icon font library -->
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                              <i class="nav-icon"></i>
+                              <p>
+                                @auth
+                                    {{auth()->user()->name}} ({{auth()->user()->role}})
+                                @endauth
+                                <i class="fas fa-angle-left right"></i>
+                              </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                              <li class="nav-item">
+                                <div class="nav-link">
+                                  {{-- <i class="far fa-circle nav-icon"></i> --}}
+                                <form action="/logout" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger btn-block">Logout</button>
+                                </form>
+                                  
+                                </div>
+                              </li>
+                            </ul>
+                          </li>
                             <li class="nav-item">
                                 <a href="/" class="nav-link {{  ($title === "Dashboard") ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -161,41 +173,42 @@
                                 </p>
                                 </a>
                             </li>
+                            
                             <li class="nav-header">Kelola User</li>
                                 <li class="nav-item">
-                                    <a href="/petugas" class="nav-link {{  ($title === "Petugas"| $title === "Detail Petugas" | $title === "Tambah Petugas"| $title === "Edit Petugas") ? 'active' : '' }}">
+                                    <a href="/petugas" class="nav-link {{ Request::is('petugas*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-user"></i>
                                     <p>Petugas</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/pemilik-usaha" class="nav-link {{  ($title === "Pemilik Usaha"| $title === "Detail Pemilik Usaha" | $title === "Tambah Pemilik Usaha"| $title === "Edit Pemilik Usaha") ? 'active' : '' }}">
+                                    <a href="/pemilik-usaha" class="nav-link {{ Request::is('pemilik-usaha*') ? 'active' : '' }}">
                                     <i class="nav-icon far fa-user"></i>
                                     <p>Pemilik Usaha</p>
                                     </a>
                             </li>
                             <li class="nav-header">Master Data</li>
                                 <li class="nav-item">
-                                    <a href="/usaha" class="nav-link {{  ($title === "Usaha"| $title === "Detail Usaha" | $title === "Tambah Usaha"| $title === "Edit Usaha") ? 'active' : '' }}">
+                                    <a href="/usaha" class="nav-link {{ Request::is('usaha*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-store"></i>
                                     <p>Usaha</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/iuran" class="nav-link {{  ($title === "Iuran"| $title === "Detail Iuran" | $title === "Tambah Iuran"| $title === "Edit Iuran") ? 'active' : '' }}">
+                                    <a href="/iuran" class="nav-link {{ Request::is('iuran*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-money-bill"></i>
                                     <p>Iuran</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/denda" class="nav-link {{  ($title === "Denda"|  $title === "Tambah Denda"| $title === "Edit Denda") ? 'active' : '' }}">
+                                    <a href="/denda" class="nav-link {{ Request::is('denda*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-money-bill"></i>
                                     <p>Denda</p>
                                     </a>
                                 </li>
                             </li>
                             <li class="nav-item">
-                                <a href="/transaksi" class="nav-link {{  ($title === "Transaksi"|  $title === "Tambah Transaksi"| $title === "Edit Transaksi" | $title === "Detail Transaksi") ? 'active' : '' }}">
+                                <a href="/transaksi" class="nav-link {{ Request::is('transaksi*') ? 'active' : '' }}">
                                 <i class="fas fa-money-check"></i>
                                 <p>
                                     Transaksi
