@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banjar;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class BanjarController extends Controller
 {
@@ -15,6 +16,11 @@ class BanjarController extends Controller
     public function index()
     {
         //
+        $title = 'Data Banjar';
+        $banjars = Banjar::all();
+        return view('banjar.banjar', compact('banjars', 'title'));
+        // $banjars = Banjar::latest()->paginate(5);
+        // return view('banjar.banjar', compact('banjars', 'title'))->with('i', (request()->input('page', 1)-1)*5);
     }
 
     /**
@@ -24,7 +30,8 @@ class BanjarController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Tambah Data Banjar';
+        return view('banjar.banjar-tambah', compact('title'));
     }
 
     /**
@@ -36,6 +43,19 @@ class BanjarController extends Controller
     public function store(Request $request)
     {
         //
+        //melakukan validasi data
+        $request->validate([
+            'nama_banjar' => 'required',
+            'alamat' => 'required',
+        ]);
+
+        Banjar::create([
+            'name' => $request->nama_banjar,
+            'address' => $request->alamat,
+        ]);
+
+        return redirect()->route('banjar-index')
+            ->with('success', 'Data Banjar berhasil ditambahkan');
     }
 
     /**
@@ -44,9 +64,12 @@ class BanjarController extends Controller
      * @param  \App\Models\Banjar  $banjar
      * @return \Illuminate\Http\Response
      */
-    public function show(Banjar $banjar)
+    public function show($id)
     {
         //
+        $title = 'Detail Banjar';
+        $banjar = Banjar::find($id);
+        return view('banjar.banjar-detail', compact('banjar', 'title'));
     }
 
     /**
@@ -55,9 +78,12 @@ class BanjarController extends Controller
      * @param  \App\Models\Banjar  $banjar
      * @return \Illuminate\Http\Response
      */
-    public function edit(Banjar $banjar)
+    public function edit($id)
     {
         //
+        $title = 'Edit Banjar';
+        $banjar = Banjar::find($id);
+        return view('banjar.banjar-edit', compact('banjar', 'title'));
     }
 
     /**
@@ -67,9 +93,22 @@ class BanjarController extends Controller
      * @param  \App\Models\Banjar  $banjar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Banjar $banjar)
+    public function update(Request $request, $id)
     {
-        //
+        //melakukan validasi data
+        $request->validate([
+            'nama_banjar' => 'required',
+            'alamat' => 'required',
+        ]);
+
+        Banjar::find($id)->update([
+            'name' => $request->nama_banjar,
+            'address' => $request->alamat,
+        ]);
+
+        return redirect()->route('banjar-index')
+            ->with('success', 'Data Banjar berhasil dirubah');
+
     }
 
     /**
@@ -78,8 +117,10 @@ class BanjarController extends Controller
      * @param  \App\Models\Banjar  $banjar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Banjar $banjar)
+    public function destroy($id)
     {
-        //
+        Banjar::find($id)->delete();
+        return redirect()->route('banjar-index')
+            ->with('success', 'Banjar Berhasil Dihapus');
     }
 }

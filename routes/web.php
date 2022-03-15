@@ -4,6 +4,7 @@ use App\Models\User;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\BanjarController;
 use App\Http\Controllers\TransactionController;
 
 /*
@@ -145,7 +146,19 @@ Route::middleware('auth')->group(function(){
             "title" => "Edit Denda"
         ]);
     });
+
+    // banjar
+    Route::get('/banjar', [BanjarController::class, 'index'])->name('banjar-index');
+    Route::get('/banjar-tambah', [BanjarController::class, 'create'])->name('banjar-tambah');
+    Route::get('/banjar-detail/{id}', [BanjarController::class, 'show'])->name('banjar-detail');
+    Route::get('/banjar-edit/{id}', [BanjarController::class, 'edit'])->name('banjar-edit');
+    Route::post('/banjar-store', [BanjarController::class, 'store'])->name('banjar-store');
+    Route::post('/banjar-update/{id}', [BanjarController::class, 'update'])->name('banjar-update');
+    Route::get('/banjar-delete/{id}', [BanjarController::class, 'destroy'])->name('banjar-hapus');
     
+
+    
+    // transaksi
     Route::get('/transaksi', [TransactionController::class, 'index']);
     
     Route::get('/transaksi-tambah', function () {
