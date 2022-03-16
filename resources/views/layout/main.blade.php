@@ -207,7 +207,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/banjar" class="nav-link {{ Request::is('banjar*') ? 'active' : '' }}">
+                                    <a href="/banjar" class="nav-link {{ Request::is('banjar*', 'tempekan*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-store"></i>
                                     <p>Banjar</p>
                                     </a>
@@ -231,6 +231,29 @@
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
+
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                        <h1 class="m-0">@yield('page-title')</h1>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            @yield('page-breadcrumb')
+                            
+                        </ol>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </div>
+                <!-- /.content-header -->
+
                 <!-- Main content -->
                 <section class="content">
                     <div class="container-fluid">
@@ -249,7 +272,7 @@
             <!-- /.content-wrapper -->
             <footer class="main-footer">
                 <strong
-                    >Copyright &copy; 2021
+                    >Copyright &copy; {{date('Y')}}
                     <a href="/template">RETRIBUSI PAD</a>.</strong
                 >
                 All rights reserved.

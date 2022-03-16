@@ -52,7 +52,7 @@
                 <h2>Tempekan</h2>
                 {{-- list tombol --}}
                 <div class="tombol">
-                    <a href="{{ route('tempekan-tambah', $banjar->id) }}" class="btn btn-info"> Tambah Tempekan</a>
+                    <a href="{{ route('tempekan-tambah') }}" class="btn btn-info"> Tambah Tempekan</a>
                 </div>                    
             </div>
         </div>
@@ -76,8 +76,8 @@
                             <td>{{ $tempekan->name }}</td>
                             <td>{{ $banjar->name }}</td>
                             <td class="text-center fit">
-                                <a href="{{ route('tempekan-edit', $tempekan->id) }}" class="btn btn-warning"  data-toggle="tooltip" data-placement="top" title="Edit"><span class="fas fa-pencil-alt"></span></a>
-                                <a href="{{ route('tempekan-hapus', $tempekan->id) }}" class="btn btn-danger" onclick="return confirm('Anda yakin menghapus data ini?')" data-toggle="tooltip" data-placement="top" title="Hapus"><span class="fas fa-trash"></span></a>
+                                <a href="" class="btn btn-warning"  data-toggle="tooltip" data-placement="top" title="Edit"><span class="fas fa-pencil-alt"></span></a>
+                                <a href="" class="btn btn-danger" onclick="return confirm('Anda yakin menghapus data ini?')" data-toggle="tooltip" data-placement="top" title="Hapus"><span class="fas fa-trash"></span></a>
                             </td>
                         </tr>
                     @endforeach

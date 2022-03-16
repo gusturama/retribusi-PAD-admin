@@ -24,11 +24,11 @@
 <div class="card mt-3">
     <div class="card-header">
         <h1 class="card-title">Kelola Data {{$title}}</h1>
-        {{-- @if ($message = Session::get('success'))
+        @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
-        @endif --}}
+    @endif
     </div>
     <!-- /.card-header -->
     <div class="card-body">

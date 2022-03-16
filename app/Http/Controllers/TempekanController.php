@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banjar;
 use App\Models\Tempekan;
 use Illuminate\Http\Request;
 
@@ -22,9 +23,11 @@ class TempekanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $title = 'Tambah Data Tempekan';
+        $banjar = Banjar::find($id);
+        return view('tempekan.tempekan-tambah', compact('title', 'banjar'));
     }
 
     /**
@@ -35,7 +38,20 @@ class TempekanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //melakukan validasi data
+        $request->validate([
+            'nama_tempekan' => 'required',
+            'banjar_id'=> 'required'
+        ]);
+        $id = $request->banjar_id;
+        Tempekan::create([
+            'name' => $request->nama_tempekan,
+            'banjar_id' => $id,
+        ]);
+        $id = $request->banjar_id;
+        // $url = 'banjar-detail/'.$request->banjar_id;
+        return redirect()->route('banjar-detail', ['id' => $id])
+            ->with('success', 'Data Tempekan berhasil ditambahkan');
     }
 
     /**
@@ -55,9 +71,12 @@ class TempekanController extends Controller
      * @param  \App\Models\Tempekan  $tempekan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tempekan $tempekan)
+    public function edit($id)
     {
         //
+        $title='Edit Tempekan';
+        $tempekan = Tempekan::find($id);
+        return view('tempekan.tempekan-edit', compact('title', 'tempekan'));
     }
 
     /**
@@ -67,9 +86,22 @@ class TempekanController extends Controller
      * @param  \App\Models\Tempekan  $tempekan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tempekan $tempekan)
+    public function update(Request $request, $id)
     {
-        //
+        //melakukan validasi data
+        $request->validate([
+            'nama_tempekan' => 'required',
+        ]);
+
+        Tempekan::find($id)->update([
+            'name' => $request->nama_tempekan,
+        ]);
+
+        $tempekan=Tempekan::find($id);
+        $url_kembali = 'banjar-detail/'.$tempekan->banjar_id;
+
+        return redirect($url_kembali)
+            ->with('success', 'Data Temepekan berhasil dirubah');
     }
 
     /**
@@ -78,8 +110,14 @@ class TempekanController extends Controller
      * @param  \App\Models\Tempekan  $tempekan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tempekan $tempekan)
+    public function destroy($id)
     {
-        //
+        $tempekan=Tempekan::find($id);
+        $url_kembali = 'banjar-detail/'.$tempekan->banjar_id;
+        Tempekan::find($id)->delete();
+
+
+        return redirect($url_kembali)
+            ->with('success', 'Data Temepekan berhasil dihapus');
     }
 }

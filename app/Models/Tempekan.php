@@ -9,6 +9,9 @@ class Tempekan extends Model
 {
     use HasFactory;
     protected $table = 'tempekans';
+    protected $guarded = [
+        'id'
+    ];
 
     public function banjar()
     {

@@ -5,6 +5,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BanjarController;
+use App\Http\Controllers\TempekanController;
 use App\Http\Controllers\TransactionController;
 
 /*
@@ -155,6 +156,15 @@ Route::middleware('auth')->group(function(){
     Route::post('/banjar-store', [BanjarController::class, 'store'])->name('banjar-store');
     Route::post('/banjar-update/{id}', [BanjarController::class, 'update'])->name('banjar-update');
     Route::get('/banjar-delete/{id}', [BanjarController::class, 'destroy'])->name('banjar-hapus');
+
+    // tempekan
+    Route::get('/tempekan-tambah/{id}', [TempekanController::class, 'create'])->name('tempekan-tambah');
+    Route::post('/tempekan-store', [TempekanController::class, 'store'])->name('tempekan-store');
+    Route::get('/tempekan-edit/{id}', [TempekanController::class, 'edit'])->name('tempekan-edit');
+    Route::post('/tempekan-update/{id}', [TempekanController::class, 'update'])->name('tempekan-update');
+    Route::get('/tempekan-delete/{id}', [TempekanController::class, 'destroy'])->name('tempekan-hapus');
+
+
     
 
     

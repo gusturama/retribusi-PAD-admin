@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banjar;
+use App\Models\Tempekan;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -69,7 +70,8 @@ class BanjarController extends Controller
         //
         $title = 'Detail Banjar';
         $banjar = Banjar::find($id);
-        return view('banjar.banjar-detail', compact('banjar', 'title'));
+        $tempekans = Tempekan::where('banjar_id', $id)->get();
+        return view('banjar.banjar-detail', compact('banjar', 'title', 'tempekans'));
     }
 
     /**
