@@ -1,10 +1,17 @@
 @extends('layout.main')
+
 @section('js')
       <!-- Page specific script -->
       <script>
         $(function () {
             $("#tb_tempekan").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "language":{
+                "emptyTable": "Belum ada data"
+            },
+            "responsive": true, 
+            "lengthChange": false, 
+            "autoWidth": false, 
+            "pageLength" : 5
             // "buttons": ["copy", "csv", "excel", "pdf", "print"]
             })
         });

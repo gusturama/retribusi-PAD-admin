@@ -3,8 +3,14 @@
       <script>
         $(function () {
             $("#example1").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-            // "buttons": ["copy", "csv", "excel", "pdf", "print"]
+            "language":{
+                "emptyTable": "Belum ada data"
+            },
+            "responsive": true, 
+            "lengthChange": false, 
+            "autoWidth": false, 
+            "pageLength" : 5,
+            buttons: ["copy", "csv", "excel", "pdf", "print"]
             })
         });
         $(function () {
@@ -32,7 +38,7 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-        <a href="{{ route('banjar-tambah') }}" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Data</a>
+        <a href="{{ route('banjar-tambah') }}" class="btn btn-success mb-2"><i class="fa fa-plus"></i> Tambah Data</a>
         <table id="example1" class="table table-bordered table-hover">
         <thead>
         <tr>

@@ -208,7 +208,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="/banjar" class="nav-link {{ Request::is('banjar*', 'tempekan*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-store"></i>
+                                    <i class="nav-icon fas fa-landmark"></i>
                                     <p>Banjar</p>
                                     </a>
                                 </li>
@@ -289,6 +289,11 @@
         </div>
         <!-- ./wrapper -->
 
+
+        {{-- javascript --}}
+
+       
+
         <!-- jQuery -->
         <script src="/plugins/jquery/jquery.min.js"></script>
         <!-- jQuery UI 1.11.4 -->
@@ -341,5 +346,6 @@
         @section('js')
             
         @show
+
     </body>
 </html>
