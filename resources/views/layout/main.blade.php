@@ -200,12 +200,12 @@
                                     <p>Iuran</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="/denda" class="nav-link {{ Request::is('denda*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-money-bill"></i>
                                     <p>Denda</p>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item">
                                     <a href="/banjar" class="nav-link {{ Request::is('banjar*', 'tempekan*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-landmark"></i>
