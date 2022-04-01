@@ -14,7 +14,9 @@ class CompanyTypeController extends Controller
      */
     public function index()
     {
-        //
+        $title = "Data Jenis Usaha";
+        $company_types = CompanyType::all();
+        return view('jenis-usaha.jenis-usaha', compact('company_types', 'title'));
     }
 
     /**
@@ -24,7 +26,8 @@ class CompanyTypeController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Tambah Data Jenis Usaha';
+        return view('jenis-usaha.jenis-usaha-tambah', compact('title'));
     }
 
     /**
@@ -36,6 +39,18 @@ class CompanyTypeController extends Controller
     public function store(Request $request)
     {
         //
+        //melakukan validasi data
+        $request->validate([
+            'nama_jenis_usaha' => 'required'
+        ]);
+
+        CompanyType::create([
+            'type' => $request->nama_jenis_usaha
+        ]);
+
+        return redirect()->route('jenis-usaha-index')
+            ->with('success', 'Data Jenis Usaha berhasil ditambahkan');
+    
     }
 
     /**
@@ -55,9 +70,11 @@ class CompanyTypeController extends Controller
      * @param  \App\Models\CompanyType  $companyType
      * @return \Illuminate\Http\Response
      */
-    public function edit(CompanyType $companyType)
+    public function edit($id)
     {
-        //
+        $title = 'Edit Jenis Usaha';
+        $company_type = CompanyType::find($id);
+        return view('jenis-usaha.jenis-usaha-edit', compact('company_type', 'title'));
     }
 
     /**
@@ -67,9 +84,19 @@ class CompanyTypeController extends Controller
      * @param  \App\Models\CompanyType  $companyType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CompanyType $companyType)
+    public function update(Request $request, $id)
     {
-        //
+        //melakukan validasi data
+        $request->validate([
+            'nama_jenis_usaha' => 'required'
+        ]);
+
+        CompanyType::find($id)->update([
+            'type' => $request->nama_jenis_usaha
+        ]);
+
+        return redirect()->route('jenis-usaha-index')
+            ->with('success', 'Data Jenis Usaha berhasil dirubah');
     }
 
     /**

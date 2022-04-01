@@ -14,7 +14,9 @@ class CompanyScaleController extends Controller
      */
     public function index()
     {
-        //
+        $title = "Data Jenis Usaha";
+        $company_scales = CompanyScale::all();
+        return view('skala-usaha.skala-usaha', compact('company_scales', 'title'));
     }
 
     /**
@@ -24,7 +26,8 @@ class CompanyScaleController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Tambah Data Skala Usaha';
+        return view('skala-usaha.skala-usaha-tambah', compact('title'));
     }
 
     /**
@@ -36,6 +39,17 @@ class CompanyScaleController extends Controller
     public function store(Request $request)
     {
         //
+        //melakukan validasi data
+        $request->validate([
+            'nama_skala_usaha' => 'required'
+        ]);
+
+        CompanyScale::create([
+            'scale' => $request->nama_skala_usaha
+        ]);
+
+        return redirect()->route('skala-usaha-index')
+            ->with('success', 'Data Skala Usaha berhasil ditambahkan');
     }
 
     /**
@@ -55,9 +69,11 @@ class CompanyScaleController extends Controller
      * @param  \App\Models\CompanyScale  $companyScale
      * @return \Illuminate\Http\Response
      */
-    public function edit(CompanyScale $companyScale)
+    public function edit($id)
     {
-        //
+        $title = 'Edit Skala Usaha';
+        $company_scale = CompanyScale::find($id);
+        return view('skala-usaha.skala-usaha-edit', compact('company_scale', 'title'));
     }
 
     /**
@@ -67,9 +83,19 @@ class CompanyScaleController extends Controller
      * @param  \App\Models\CompanyScale  $companyScale
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CompanyScale $companyScale)
+    public function update(Request $request, $id)
     {
-        //
+        //melakukan validasi data
+        $request->validate([
+            'nama_skala_usaha' => 'required'
+        ]);
+
+        CompanyScale::find($id)->update([
+            'scale' => $request->nama_skala_usaha
+        ]);
+
+        return redirect()->route('skala-usaha-index')
+            ->with('success', 'Data Skala Usaha berhasil dirubah');
     }
 
     /**

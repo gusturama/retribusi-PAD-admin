@@ -9,4 +9,14 @@ class CompanyScale extends Model
 {
     use HasFactory;
     protected $table = 'company_scales';
+
+    protected $guarded = [
+        'id'
+    ];
+
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
 }

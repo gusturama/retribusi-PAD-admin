@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BanjarController;
 use App\Http\Controllers\TempekanController;
+use App\Http\Controllers\CompanyTypeController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\CompanyScaleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -130,23 +132,6 @@ Route::middleware('auth')->group(function(){
         ]);
     });
     
-    Route::get('/denda', function () {
-        return view('denda/denda', [
-            "title" => "Denda"
-        ]);
-    });
-    
-    Route::get('/denda-tambah', function () {
-        return view('denda/denda-tambah', [
-            "title" => "Tambah Denda"
-        ]);
-    });
-    
-    Route::get('/denda-edit', function () {
-        return view('denda/denda-edit', [
-            "title" => "Edit Denda"
-        ]);
-    });
 
     // banjar
     Route::get('/banjar', [BanjarController::class, 'index'])->name('banjar-index');
@@ -163,6 +148,21 @@ Route::middleware('auth')->group(function(){
     Route::get('/tempekan-edit/{id}', [TempekanController::class, 'edit'])->name('tempekan-edit');
     Route::post('/tempekan-update/{id}', [TempekanController::class, 'update'])->name('tempekan-update');
     Route::get('/tempekan-delete/{id}', [TempekanController::class, 'destroy'])->name('tempekan-hapus');
+
+    // jenis usaha
+    Route::get('/jenis-usaha', [CompanyTypeController::class, 'index'])->name('jenis-usaha-index');
+    Route::get('/jenis-usaha-tambah', [CompanyTypeController::class, 'create'])->name('jenis-usaha-tambah');
+    Route::post('/jenis-usaha-store', [CompanyTypeController::class, 'store'])->name('jenis-usaha-store');
+    Route::get('/jenis-usaha-edit/{id}', [CompanyTypeController::class, 'edit'])->name('jenis-usaha-edit');
+    Route::post('/jenis-usaha-update/{id}', [CompanyTypeController::class, 'update'])->name('jenis-usaha-update');
+
+    // skala usaha
+    Route::get('/skala-usaha', [CompanyScaleController::class, 'index'])->name('skala-usaha-index');
+    Route::get('/skala-usaha-tambah', [CompanyScaleController::class, 'create'])->name('skala-usaha-tambah');
+    Route::post('/skala-usaha-store', [CompanyScaleController::class, 'store'])->name('skala-usaha-store');
+    Route::get('/skala-usaha-edit/{id}', [CompanyScaleController::class, 'edit'])->name('skala-usaha-edit');
+    Route::post('/skala-usaha-update/{id}', [CompanyScaleController::class, 'update'])->name('skala-usaha-update');
+    
 
 
     

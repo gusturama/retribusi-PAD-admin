@@ -189,15 +189,29 @@
                             </li>
                             <li class="nav-header">Master Data</li>
                                 <li class="nav-item">
-                                    <a href="/usaha" class="nav-link {{ Request::is('usaha*') ? 'active' : '' }}">
+                                    <a href="/jenis-usaha" class="nav-link {{ Request::is('jenis-usaha*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-store"></i>
-                                    <p>Usaha</p>
+                                    <p>Jenis Usaha</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="/skala-usaha" class="nav-link {{ Request::is('skala-usaha*') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-store"></i>
+                                    <p>Skala Usaha</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="/banjar" class="nav-link {{ Request::is('banjar*', 'tempekan*') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-landmark"></i>
+                                    <p>Banjar</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
                                     <a href="/iuran" class="nav-link {{ Request::is('iuran*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-money-bill"></i>
-                                    <p>Iuran</p>
+                                    <p>Jenis Iuran</p>
                                     </a>
                                 </li>
                                 {{-- <li class="nav-item">
@@ -206,21 +220,30 @@
                                     <p>Denda</p>
                                     </a>
                                 </li> --}}
-                                <li class="nav-item">
-                                    <a href="/banjar" class="nav-link {{ Request::is('banjar*', 'tempekan*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-landmark"></i>
-                                    <p>Banjar</p>
-                                    </a>
-                                </li>
+                                
+                            
+
+                            <li class="nav-header">Data</li>
+                            <li class="nav-item">
+                                <a href="/usaha" class="nav-link {{ Request::is('usaha*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-store"></i>
+                                <p>Usaha</p>
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <a href="/transaksi" class="nav-link {{ Request::is('transaksi*') ? 'active' : '' }}">
                                 <i class="fas fa-money-check"></i>
-                                <p>
-                                    Transaksi
-                                </p>
+                                <p>Transaksi</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="/transaksi" class="nav-link {{ Request::is('transaksi*') ? 'active' : '' }}">
+                                <i class="fas fa-money-check"></i>
+                                <p>Iuran</p>
+                                </a>
+                            </li>
+                            
+                            
 
                         </ul>
                     </nav>
