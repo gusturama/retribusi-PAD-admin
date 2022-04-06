@@ -4,6 +4,7 @@ use App\Models\User;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\BanjarController;
 use App\Http\Controllers\TempekanController;
@@ -38,36 +39,7 @@ Route::middleware('auth')->group(function(){
             "title" => "Dashboard"
         ]);
     });
-    
-
-    
-    // pemilik usaha
-    Route::get('/pemilik-usaha', function () {
-        return view('pemilik-usaha/pemilik-usaha', [
-            "title" => "Pemilik Usaha"
-        ]);
-    });
-    
-    Route::get('/pemilik-usaha-detail', function () {
-        return view('pemilik-usaha/pemilik-usaha-detail', [
-            "title" => "Detail Pemilik Usaha"
-        ]);
-    });
-    
-    Route::get('/pemilik-usaha-tambah', function () {
-        return view('pemilik-usaha/pemilik-usaha-tambah', [
-            "title" => "Tambah Pemilik Usaha"
-        ]);
-    });
-    
-    Route::get('/pemilik-usaha-edit', function () {
-        return view('pemilik-usaha/pemilik-usaha-edit', [
-            "title" => "Edit Pemilik Usaha"
-        ]);
-    });
-    
-    
-    
+        
     Route::get('/usaha', function () {
         return view('usaha/usaha', [
             "title" => "Usaha"
@@ -110,6 +82,14 @@ Route::middleware('auth')->group(function(){
         ]);
     });
     
+    // pemilik usaha / owner
+    Route::get('/pemilik-usaha', [OwnerController::class, 'index'])->name('pemilik-usaha-index');
+    Route::get('/pemilik-usaha-tambah', [OwnerController::class, 'create'])->name('pemilik-usaha-tambah');
+    Route::post('/pemilik-usaha-store', [OwnerController::class, 'store'])->name('pemilik-usaha-store');
+    Route::get('/pemilik-usaha-detail/{id}', [OwnerController::class, 'show'])->name('pemilik-usaha-detail');
+    Route::get('/pemilik-usaha-edit/{id}', [OwnerController::class, 'edit'])->name('pemilik-usaha-edit');
+    Route::post('/pemilik-usaha-update/{id}', [OwnerController::class, 'update'])->name('pemilik-usaha-update');
+    Route::get('/pemilik-usaha-delete/{id}', [OwnerController::class, 'destroy'])->name('pemilik-usaha-hapus');
 
     // petugas / staff
     Route::get('/petugas', [StaffController::class, 'index'])->name('petugas-index');

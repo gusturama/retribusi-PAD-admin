@@ -65,8 +65,10 @@
           <div class="mb-2" style="width: 200px; height:200px;">
             @if ($user->photo)
             <img  src="{{asset('storage/'. $user->photo)}}" alt="" class="img-fluid img-preview">
-            @endif
+            @else
             <img  src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="" class="img-fluid img-preview">
+            @endif
+
           </div>
           <div class="input-group">
               <div class="custom-file">

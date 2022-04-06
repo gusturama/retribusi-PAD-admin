@@ -27,16 +27,12 @@
 
 @section('content')
 
-<div class="card mt-3">
-    <div class="card-header">
-        <h1 class="card-title">Kelola Data {{$title}}</h1>
+<div class="card">
         {{-- @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
         @endif --}}
-    </div>
-    <!-- /.card-header -->
     <div class="card-body">
         <a href="{{ route('jenis-usaha-tambah') }}" class="btn btn-success mb-2"><i class="fa fa-plus"></i> Tambah Data</a>
         <table id="example1" class="table table-bordered table-hover">

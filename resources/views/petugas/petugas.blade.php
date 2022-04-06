@@ -15,14 +15,13 @@
 
 @extends('layout.main')
 
+@section('page-title')
+    {{$title}}
+@endsection
+
 @section('content')
 
-<h1 class="mt-3">Data {{$title}}</h1>
-<div class="card mt-3">
-    <div class="card-header">
-        <h1 class="card-title">Kelola Data {{$title}}</h1>
-    </div>
-    <!-- /.card-header -->
+<div class="card">
     <div class="card-body">
         <a href="/petugas-tambah" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Data</a>
         <table id="example1" class="table table-bordered table-hover">

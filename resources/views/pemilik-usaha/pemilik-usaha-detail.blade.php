@@ -9,56 +9,41 @@
                 <h2>{{$title}}</h2>
                 {{-- list tombol --}}
                 <div class="tombol">
-                    <a href="/pemilik-usaha-edit" class="btn btn-info"><span class="fas fa-pencil-alt"></span> Edit Data</a>
+                    <a href="{{ route('pemilik-usaha-edit', $user->id) }}" class="btn btn-info"><span class="fas fa-pencil-alt"></span> Edit Data</a>
                     <a href="/pemilik-usaha" class="btn btn-primary"><span class="fas fa-reply"></span> Kembali</a>
                 </div>                    
             </div>
         </div>
         <div class="card-body text-lg">
             {{-- foto profil --}}
+            @if ($user->photo)
             <div class="foto-profil text-center">
-                <img src="dist/img/user2-160x160.jpg" class="img-thumbnail rounded" alt="...">
+                <img style="width: 200px; height:200px;" src="{{asset('storage/'. $user->photo)}}" class="img-thumbnail rounded" alt="foto user">
             </div>
+            @else
+            <div class="foto-profil text-center">
+                <img style="width: 200px; height:200px;" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" class="img-thumbnail rounded" alt="foto user">
+            </div>
+            @endif
+           
             {{-- data profil --}}
             <strong></i>Nama</strong>
             <p class="text-muted">
-                I Wayan Ariyadi
+                {{$user->name}}
             </p>
             <hr>
-            <strong></i>Jenis Kelamin</strong>
+            <strong></i>Email</strong>
             <p class="text-muted">
-                Laki-laki
-            </p>
-            <hr>
-            <strong></i>Tempat dan Tanggal Lahir</strong>
-            <p class="text-muted">
-                Gianyar, 11 Februari 1980
-            </p>
-            <hr>
-            <strong></i>Status Perkawinan</strong>
-            <p class="text-muted">
-                Kawin
-            </p>
-            <hr>
-            <strong></i> Alamat</strong>
-            <p class="text-muted">
-                Jalan Merpati no XI, Padangsambian
-            </p>
-            <hr>
-            <strong></i> Foto KTP</strong>
-            <p class="text-muted">
-                <img src="/img/sample-ktp.jpg" class="img-thumbnail rounded" alt="...">
+                {{$user->email}}
             </p>
             <hr>
             <strong></i>Nomor HP</strong>
             <p class="text-muted">
-                0809989898
+                {{$user->phone}}
+
             </p>
             <hr>
-            <strong></i>Status Verifikasi Akun</strong>
-            <p class="">
-                <div class="btn btn-success"><span class="fas fa-check"></span> Terverifikasi</div>
-            </p>
+            
         </div>
     </div>
 </div>

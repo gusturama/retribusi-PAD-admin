@@ -13,98 +13,48 @@
     </div>
     <!-- /.card-header -->
     <!-- form start -->
-    <form>
+    @if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+    <form method="POST" enctype="multipart/form-data" action="{{ route('pemilik-usaha-store') }}">
+      @csrf
       <div class="card-body">
         <div class="form-group">
           <label>Nama</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukan nama " required="required">
+          <input type="text" name="nama" class="form-control" placeholder="Masukan nama " required="required">
         </div>
         <div class="form-group">
-            <label for="exampleSelectBorder">Jenis Kelamin</label>
-            <select class="custom-select form-control-border" id="exampleSelectBorder" required="required">
-              <option>Laki-laki</option>
-              <option>Perempuan</option>
-            </select>
-        </div>
-        <div class="row">
-            <div class="col-md">
-                <div class="form-group">
-                    <label>Tempat Lahir</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukan tempat lahir ">
-                  </div>
-            </div>
-            <div class="col-md">
-                <label>Tanggal Lahir</label>
-                <div class="input-group date">
-                        <input type="date" class="form-control datetimepicker-input" data-target="#reservationdate"/>
-                </div>
-            </div>
+          <label>Email</label>
+          <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Masukan email " required="required">
         </div>
         <div class="form-group">
-            <label for="exampleSelectBorder">Status Perkawinan</label>
-            <select class="custom-select form-control-border" id="exampleSelectBorder" required="required">
-              <option>Kawin</option>
-              <option>Belum kawin</option>
-            </select>
+          <label>Nomor HP</label>
+          <input type="text" name="no_hp" class="form-control" placeholder="Masukan nomor handphone " required="required">
         </div>
         <div class="form-group">
-            <label>Alamat</label>
-            {{-- <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukan alamat "> --}}
-            <textarea name="" class="form-control" rows="2"></textarea>
-          </div>
-        <div class="row">
-            <div class="col-md">
-                <div class="form-group">
-                    <div class="form-group">
-                        <label>Nomor HP</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukan nomor HP " required="required">
-                      </div>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="form-group">
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="Password" class="form-control" id="exampleInputEmail1" placeholder="Masukan password " required="required">
-                      </div>
-                </div>
+          <label>Password</label>
+          <input type="password" name="password" class="form-control" id="exampleInputEmail1" placeholder="Masukan nomor handphone " required="required">
+        </div>
+    
+      <div class="form-group">
+          <label for="exampleFormControlFile1">Foto Profil</label>
+          
+            <img  src="" alt="" class="img-fluid img-preview mb-2">
+          
+          <div class="input-group">
+            <div class="custom-file">
+              <input type="file" name="foto" class="custom-file-input" id="foto" onchange="previewImage()">
+              <label class="custom-file-label" for="inputGroupFile01">Pilih file</label>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-md">
-                <div class="form-group">
-                    <label for="exampleFormControlFile1">Foto KTP</label>
-                    <div class="input-group">
-                        <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="inputGroupFile01">
-                          <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="form-group">
-                    <label for="exampleFormControlFile1">Foto Profil</label>
-                    <div class="input-group">
-                        <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="inputGroupFile01">
-                          <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-          <label for="exampleSelectBorder">Status Verifikasi</label>
-          <select class="custom-select form-control-border" id="exampleSelectBorder" required="required">
-            <option>Terverifikasi</option>
-            <option>Belum diverifikasi</option>
-            <option>Ditolak</option>
-          </select>
       </div>
-        
       </div>
       <!-- /.card-body -->
 
@@ -114,4 +64,25 @@
     </form>
   </div>
 
+@endsection
+
+@section('js')
+<script>
+  function previewImage(){
+    const image = document.querySelector('#foto');
+    const imgPreview = document.querySelector('.img-preview');
+
+    imgPreview.style.display = 'block';
+
+    const oFReader = new FileReader();
+    oFReader.readAsDataURL(image.files[0]);
+
+    oFReader.onload = function(oFREvent){
+      imgPreview.src = oFREvent.target.result;
+      imgPreview.style.width = '200px';
+      imgPreview.style.height = '200px';     
+    }
+  }
+  
+</script>
 @endsection
