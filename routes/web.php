@@ -4,6 +4,7 @@ use App\Models\User;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\BanjarController;
 use App\Http\Controllers\TempekanController;
 use App\Http\Controllers\CompanyTypeController;
@@ -38,30 +39,7 @@ Route::middleware('auth')->group(function(){
         ]);
     });
     
-    // Petugas
-    Route::get('/petugas', function () {
-        return view('petugas/petugas', [
-            "title" => "Petugas"
-        ]);
-    });
-    
-    Route::get('/petugas-detail', function () {
-        return view('petugas/petugas-detail', [
-            "title" => "Detail Petugas"
-        ]);
-    });
-    
-    Route::get('/petugas-tambah', function () {
-        return view('petugas/petugas-tambah', [
-            "title" => "Tambah Petugas"
-        ]);
-    });
-    
-    Route::get('/petugas-edit', function () {
-        return view('petugas/petugas-edit', [
-            "title" => "Edit Petugas"
-        ]);
-    });
+
     
     // pemilik usaha
     Route::get('/pemilik-usaha', function () {
@@ -132,6 +110,17 @@ Route::middleware('auth')->group(function(){
         ]);
     });
     
+
+    // petugas / staff
+    Route::get('/petugas', [StaffController::class, 'index'])->name('petugas-index');
+    Route::get('/petugas-tambah', [StaffController::class, 'create'])->name('petugas-tambah');
+    Route::post('/petugas-store', [StaffController::class, 'store'])->name('petugas-store');
+    Route::get('/petugas-detail/{id}', [StaffController::class, 'show'])->name('petugas-detail');
+    Route::get('/petugas-edit/{id}', [StaffController::class, 'edit'])->name('petugas-edit');
+    Route::post('/petugas-update/{id}', [StaffController::class, 'update'])->name('petugas-update');
+    Route::get('/petugas-delete/{id}', [StaffController::class, 'destroy'])->name('petugas-hapus');
+
+
 
     // banjar
     Route::get('/banjar', [BanjarController::class, 'index'])->name('banjar-index');

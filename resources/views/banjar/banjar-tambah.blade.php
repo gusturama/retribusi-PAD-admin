@@ -18,7 +18,7 @@
       <div class="card-body">
         <div class="form-group">
           <label>Nama Banjar</label>
-          <input type="text" class="form-control" name="nama_banjar" id="exampleInputEmail1"">
+          <input type="text" class="form-control" name="nama_banjar" id="exampleInputEmail1">
         </div>
         <div class="form-group">
           <label>Alamat</label>

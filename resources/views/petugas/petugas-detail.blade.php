@@ -9,50 +9,52 @@
                 <h2>{{$title}}</h2>
                 {{-- list tombol --}}
                 <div class="tombol">
-                    <a href="/petugas-edit" class="btn btn-info"><span class="fas fa-pencil-alt"></span> Edit Data</a>
+                    <a href="{{ route('petugas-edit', $user->id) }}" class="btn btn-info"><span class="fas fa-pencil-alt"></span> Edit Data</a>
                     <a href="/petugas" class="btn btn-primary"><span class="fas fa-reply"></span> Kembali</a>
                 </div>                    
             </div>
         </div>
         <div class="card-body text-lg">
             {{-- foto profil --}}
+            @if ($user->photo)
             <div class="foto-profil text-center">
-                <img src="dist/img/user2-160x160.jpg" class="img-thumbnail rounded" alt="...">
+                <img style="width: 200px; height:200px;" src="{{asset('storage/'. $user->photo)}}" class="img-thumbnail rounded" alt="foto user">
             </div>
+            @else
+            <div class="foto-profil text-center">
+                <img style="width: 200px; height:200px;" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" class="img-thumbnail rounded" alt="foto user">
+            </div>
+            @endif
+           
             {{-- data profil --}}
             <strong></i>Nama</strong>
             <p class="text-muted">
-                I Wayan Ariyadi
+                {{$user->name}}
             </p>
             <hr>
-            <strong></i>Jenis Kelamin</strong>
+            <strong></i>Email</strong>
             <p class="text-muted">
-                Laki-laki
-            </p>
-            <hr>
-            <strong></i>Tempat dan Tanggal Lahir</strong>
-            <p class="text-muted">
-                Gianyar, 11 Februari 1980
-            </p>
-            <hr>
-            <strong></i>Tempekan</strong>
-            <p class="text-muted">
-                Tempekan Kaja
-            </p>
-            <hr>
-            <strong></i>Banjar</strong>
-            <p class="text-muted">
-                Banjar Padang
+                {{$user->email}}
             </p>
             <hr>
             <strong></i>Nomor HP</strong>
             <p class="text-muted">
-                0809989898
+                {{$user->phone}}
+
             </p>
             <hr>
-            <strong></i> Alamat</strong>
+            <strong></i>Banjar</strong>
             <p class="text-muted">
-                Jalan Merpati no XI, Padangsambian
+                {{$user->staff->banjar->name}}
+            </p>
+            <hr>
+            <strong></i>Saldo</strong>
+            <p class="text-muted">
+                @if ($user->balance)
+                    {{$user->balance}}
+                @else
+                    Saldo kosong                                    
+                @endif
             </p>
             <hr>
             

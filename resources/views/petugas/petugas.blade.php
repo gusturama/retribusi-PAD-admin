@@ -28,27 +28,35 @@
         <table id="example1" class="table table-bordered table-hover">
         <thead>
         <tr>
+            <th>No</th>
             <th>Nama Petugas</th>
+            <th>Email</th>
             <th>No HP</th>
-            <th>Tempekan</th>
             <th>Banjar</th>
+            <th>Saldo</th>
             <th class="text-center">Aksi</th>
         </tr>
         </thead>
         <tbody>
-        @for ($i = 10; $i < 35; $i++)
-        <tr>
-            <td>Petugas {{$i}}</td>
-            <td>08899999</td>
-            <td>Kaja</td>
-            <td>Banjar Padangsambian</td>
+        @php
+        $i = 1;
+        @endphp
+        @foreach($staffs as $staff)
+        <tr>   
+            <td>{{ $i++ }}</td>
+            <td>{{ $staff->user->name }}</td>
+            <td>{{ $staff->user->email }}</td>
+            <td>{{ $staff->user->phone }}</td>
+            <td>{{ $staff->banjar->name }}</td>
+            <td>{{ $staff->balance }}</td>
+            
             <td class="text-center fit">
-                <a href="/petugas-detail" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Lihat Detail"><span class="fas fa-eye"></span></a>
-                <a href="/petugas-edit" class="btn btn-warning"  data-toggle="tooltip" data-placement="top" title="Edit"><span class="fas fa-pencil-alt"></span></a>
-                <a href="#" class="btn btn-danger" onclick="return confirm('Anda yakin menghapus data ini?')" data-toggle="tooltip" data-placement="top" title="Hapus"><span class="fas fa-trash"></span></a>
+                <a href="{{ route('petugas-detail', $staff->user->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Lihat Detail"><span class="fas fa-eye"></span></a>
+                <a href="{{ route('petugas-edit', $staff->user->id) }}" class="btn btn-warning"  data-toggle="tooltip" data-placement="top" title="Edit"><span class="fas fa-pencil-alt"></span></a>
+                <a href="{{ route('petugas-hapus', $staff->user->id) }}" class="btn btn-danger" onclick="return confirm('Anda yakin menghapus data ini?')" data-toggle="tooltip" data-placement="top" title="Hapus"><span class="fas fa-trash"></span></a>
             </td>
-        </tr>   
-        @endfor
+        </tr>
+        @endforeach
         </tbody>
         </table>
     </div>
