@@ -7,10 +7,12 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\BanjarController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\TempekanController;
 use App\Http\Controllers\CompanyTypeController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CompanyScaleController;
+use App\Http\Controllers\SubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,31 +41,7 @@ Route::middleware('auth')->group(function(){
             "title" => "Dashboard"
         ]);
     });
-        
-    Route::get('/usaha', function () {
-        return view('usaha/usaha', [
-            "title" => "Usaha"
-        ]);
-    });
-    
-    Route::get('/usaha-detail', function () {
-        return view('usaha/usaha-detail', [
-            "title" => "Detail Usaha"
-        ]);
-    });
-    
-    Route::get('/usaha-tambah', function () {
-        return view('usaha/usaha-tambah', [
-            "title" => "Tambah Usaha"
-        ]);
-    });
-    
-    Route::get('/usaha-edit', function () {
-        return view('usaha/usaha-edit', [
-            "title" => "Edit Usaha"
-        ]);
-    });
-    
+            
     Route::get('/iuran', function () {
         return view('iuran/iuran', [
             "title" => "Iuran"
@@ -81,7 +59,19 @@ Route::middleware('auth')->group(function(){
             "title" => "Edit Iuran"
         ]);
     });
+
+    Route::get('/subscription', [SubscriptionController::class, 'index'])->name('usaha-index');
     
+    
+    // usaha / company
+    Route::get('/usaha', [CompanyController::class, 'index'])->name('usaha-index');
+    Route::get('/usaha-tambah', [CompanyController::class, 'create'])->name('usaha-tambah');
+    Route::post('/usaha-store', [CompanyController::class, 'store'])->name('usaha-store');
+    Route::get('/usaha-detail/{id}', [CompanyController::class, 'show'])->name('usaha-detail');
+    Route::get('/usaha-edit/{id}', [CompanyController::class, 'edit'])->name('usaha-edit');
+    Route::post('/usaha-update/{id}', [CompanyController::class, 'update'])->name('usaha-update');
+    Route::get('/usaha-delete/{id}', [CompanyController::class, 'destroy'])->name('usaha-hapus');
+
     // pemilik usaha / owner
     Route::get('/pemilik-usaha', [OwnerController::class, 'index'])->name('pemilik-usaha-index');
     Route::get('/pemilik-usaha-tambah', [OwnerController::class, 'create'])->name('pemilik-usaha-tambah');

@@ -15,56 +15,62 @@
 
 @extends('layout.main')
 
+@section('page-title')
+    {{$title}}
+@endsection
+
 @section('content')
 
-<h1 class="mt-3">Data {{$title}}</h1>
-<div class="card mt-3">
-    <div class="card-header">
-        <h1 class="card-title">Kelola Data {{$title}}</h1>
-    </div>
-    <!-- /.card-header -->
+
+<div class="card">
     <div class="card-body">
         <a href="/usaha-tambah" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Data</a>
         <table id="example1" class="table table-bordered table-hover">
         <thead>
         <tr>
-            <th>Nama Usaha</th>
-            <th class="align-middle">No HP</th>
-            <th>Nama Pemilik Usaha</th>
-            <th class="align-middle">Alamat</th>
+            <th>No</th>
+            <th class="align-middle">Nama Usaha</th>
+            <th>Nama Pemilik</th>
+            <th class="align-middle">Banjar</th>
             <th class="text-center align-middle">Status</th>
             <th class="text-center align-middle">Aksi</th>
         </tr>
         </thead>
         <tbody>
-        @for ($i = 10; $i < 35; $i++)
+        @php
+            $i = 1;
+        @endphp
+        @foreach ($companies as $company)
         <tr>
-            @php
-                    $status = collect(["Terverifikasi", "Belum Diverifikasi", "Ditolak"]);
-                    $acak_status = $status->random();
-                    if ($acak_status == $status[0]) {
-                        $ket = array("fa-check", "btn-success");
-                    }elseif ($acak_status == $status[1]) {
-                        $ket = array("fa-circle-notch", "btn-warning");
-                    }else {
-                        $ket = array("fa-times", "btn-danger");
-                    }
-            @endphp
-
-            <td>Usaha {{$i}}</td>
-            <td>08899999</td>
-            <td>Pemilik Usaha {{$i}}</td>
-            <td>Jalan Cempaka No. IV, Desa Padangsambian</td>
+            <td>{{$i++}}</td>
+            <td>{{$company->name}}</td>
+            <td>{{$company->user->name}}</td>
+            <td>{{$company->banjar['name']}}</td>
             <td class="text-center fit">
-                <div class="btn btn-block {{$ket[1]}}"><span class="fas {{$ket[0]}}"></span> {{$acak_status}}</div>
+                @if ($company->status == 'wait_verified')
+                    <div class="btn btn-block btn-warning" style="cursor: default;"><span class="fas fa-circle-notch"></span>     
+                @elseif($company->status == 'verified')
+                    <div class="btn btn-block btn-success" style="cursor: default;"><span class="fas fa-check"></span>
+                @else
+                    <div class="btn btn-block btn-danger" style="cursor: default;"><span class="fas fa-times"></span>
+                @endif
+
+                
+                @if ($company->status == 'wait_verified')
+                    Menunggu verifikasi
+                @elseif($company->status == 'verified')
+                    Terverifikasi
+                @else
+                    Diblokir
+                @endif</div>
             </td>
             <td class="text-center fit">
-                <a href="/usaha-detail" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Lihat Detail"><span class="fas fa-eye"></span></a>
-                <a href="/usaha-edit" class="btn btn-warning"  data-toggle="tooltip" data-placement="top" title="Edit"><span class="fas fa-pencil-alt"></span></a>
-                <a href="#" class="btn btn-danger" onclick="return confirm('Anda yakin menghapus data ini?')" data-toggle="tooltip" data-placement="top" title="Hapus"><span class="fas fa-trash"></span></a>
+                <a href="{{ route('usaha-detail', $company->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Lihat Detail"><span class="fas fa-eye"></span></a>
+                <a href="{{ route('usaha-edit', $company->id) }}" class="btn btn-warning"  data-toggle="tooltip" data-placement="top" title="Edit"><span class="fas fa-pencil-alt"></span></a>
+                <a href="{{ route('usaha-hapus', $company->id) }}" class="btn btn-danger" onclick="return confirm('Anda yakin menghapus data ini?')" data-toggle="tooltip" data-placement="top" title="Hapus"><span class="fas fa-trash"></span></a>
             </td>
         </tr>   
-        @endfor
+        @endforeach
         </tbody>
         </table>
     </div>

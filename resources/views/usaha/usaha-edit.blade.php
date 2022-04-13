@@ -17,14 +17,16 @@
     crossorigin=""></script>
     
     <script>
-    var mymap = L.map('lokasi-peta').setView([-8.654318665189694, 115.18853724120854], 15);
+    var latit = {{ json_encode($company->latitude) }};
+    var longi = {{ json_encode($company->longitude) }};
+    var mymap = L.map('lokasi-peta').setView([latit, longi], 15);
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 		maxZoom: 18,
 		id: 'mapbox/streets-v11',
 		tileSize: 512,
 		zoomOffset: -1
     }).addTo(mymap);
-    var myMarker = L.marker([-8.654627812853127, 115.18781245268403], {title: "PinLokasi", draggable: true})
+    var myMarker = L.marker([latit, longi], {title: "PinLokasi", draggable: true})
 		.addTo(mymap)
 		.on('dragend', function() {
 			var coord = String(myMarker.getLatLng()).split(',');
@@ -34,8 +36,44 @@
 			var lng = coord[1].split(')');
 			console.log(lng);
 			myMarker.bindPopup("<b>Koordinat:</b> <br>Lat:" + lat[1] + "<br>Lng:" + lng[0] + ".");
-		});
 
+            $("#lat").val(lat[1]);
+            $("#lng").val(lng[0]);
+
+            
+		});
+    
+        function previewImage(){
+            const image = document.querySelector('#foto');
+            const imgPreview = document.querySelector('.img-preview');
+
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+
+            oFReader.onload = function(oFREvent){
+            imgPreview.src = oFREvent.target.result;
+            imgPreview.style.width = '400px';
+            // imgPreview.style.height = '200px';     
+            }
+        }
+
+        function previewDocument(){
+            const dokumen = document.querySelector('#dok');
+            const docPreview = document.querySelector('.doc-preview');
+
+            docPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(dokumen.files[0]);
+
+            oFReader.onload = function(oFREvent){
+            docPreview.src = oFREvent.target.result;
+            docPreview.style.width = '400px';
+            // imgPreview.style.height = '200px';     
+            }
+        }
     </script>
     
 @endsection
@@ -54,88 +92,148 @@
     </div>
     <!-- /.card-header -->
     <!-- form start -->
-    <form>
+    @if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+  @endif
+    <form method="POST" enctype="multipart/form-data" action="{{ route('usaha-update', $company->id) }}">
+        @csrf
       <div class="card-body">
+
+        <div class="form-group">
+            <label for="exampleSelectBorder"><strong>Status Verifikasi</strong></label>
+            <select name="status" class="custom-select form-control-border" id="exampleSelectBorder" required="required">
+              <option value="verified" @if ($company->status == "verified")
+                  selected
+              @endif>Terverifikasi</option>
+              <option value="wait_verified" @if ($company->status == "wait_verified")
+                  selected
+              @endif>Belum diverifikasi</option>
+              <option value="blocked" @if ($company->status == "blocked")
+                  selected
+              @endif>Ditolak</option>
+            </select>
+        </div>
+
         <div class="form-group">
           <label>Nama Usaha</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukan nama usaha " required="required">
+          <input type="text" name="nama_usaha" class="form-control" id="exampleInputEmail1" placeholder="Masukan nama usaha" value="{{$company->name}}" required="required">
         </div>
         <div class="form-group">
             <label for="exampleSelectBorder">Pilih Pemilik Usaha</label>
-            <select class="custom-select form-control-border" id="exampleSelectBorder" required="required">
-              <option>Pemilik Usaha 1</option>
-              <option>Pemilik Usaha 2</option>
-              <option>Pemilik Usaha 3</option>
+            <select name="pemilik" class="custom-select form-control-border" id="exampleSelectBorder" required="required">
+              @foreach ($owners as $owner)
+                  <option value="{{$owner->id}}" @if ($company->user->id == $owner->id)
+                      selected
+                  @endif>{{$owner->name}}</option>
+              @endforeach
             </select>
         </div>
         <div class="row">
             <div class="col-md">
                 <div class="form-group">
                     <label>Jenis Usaha</label>
-                    <select class="custom-select form-control-border" id="exampleSelectBorder" required="required">
-                        <option>Jenis Usaha 1</option>
-                        <option>Jenis Usaha 2</option>
-                        <option>Jenis Usaha 3</option>
+                    <select name="jenis_usaha" class="custom-select form-control-border" id="exampleSelectBorder" required="required">
+                        @foreach ($company_types as $company_type)
+                            <option value="{{$company_type->id}}" @if ($company_type->id == $company->company_type->id)
+                                selected
+                            @endif> {{$company_type->type}}</option>
+                        @endforeach
                     </select>
                   </div>
             </div>
-            <div class="col-md">
-                <label>Skala Usaha</label>
-                <select class="custom-select form-control-border" id="exampleSelectBorder" required="required">
-                    <option>Besar</option>
-                    <option>Menengah</option>
-                    <option>Kecil</option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-md">
                 <div class="form-group">
                     <label>Banjar</label>
-                    <select class="custom-select form-control-border" id="exampleSelectBorder" required="required">
-                        <option>Banjar 1</option>
-                        <option>Banjar 2</option>
-                        <option>Banjar 3</option>
+                    <select name="banjar" class="custom-select form-control-border" id="exampleSelectBorder" required="required">
+                        @foreach ($banjars as $banjar)
+                            <option value="{{$banjar->id}}" @if ($banjar->id == $company->banjar->id)
+                                selected
+                            @endif>{{$banjar->name}}</option>
+                        @endforeach
                     </select>
                   </div>
             </div>
-            <div class="col-md">
-                <label>Tempekan</label>
-                <select class="custom-select form-control-border" id="exampleSelectBorder" required="required">
-                    <option>Tempekan 1</option>
-                    <option>Tempekan 2</option>
-                    <option>Tempekan 3</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Alamat</label>
-            <textarea name="" class="form-control" rows="2"></textarea>
         </div>
 
         <div class="row">
             <div class="col-md">
                 <div class="form-group">
-                    <label for="exampleFormControlFile1">Foto Surat</label>
+                    <label>Jenis Pembayaran Iuran</label>
+                    <select name="kategori" class="custom-select form-control-border" id="exampleSelectBorder" required="required">
+                        @foreach ($subscription_types as $subs_type)
+                            <option value="{{$subs_type->id}}" @if ($subs_type->id == $company->subscription->subscription_type->id)
+                                selected
+                            @endif> {{$subs_type->category}}</option>
+                        @endforeach
+                    </select>
+                  </div>
+            </div>
+            <div class="col-md">
+                <div class="form-group">
+                    <label>Skala Usaha</label>
+                    <select name="skala" class="custom-select form-control-border" id="exampleSelectBorder" required="required">
+                        @foreach ($company_scales as $comp_scale)
+                            <option value="{{$comp_scale->id}}" @if ($comp_scale->id == $company->subscription->company_scale->id)
+                                selected
+                            @endif>{{$comp_scale->scale}}</option>
+                        @endforeach
+                    </select>
+                  </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Alamat</label>
+            <textarea name="alamat" class="form-control" rows="2">{{ $company->address }}</textarea>
+        </div>
+
+        <div class="row">
+            <div class="col-md">
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Dokumen</label>
+                    @if ($company->documents)
+                        @if (str_contains($company->documents, 'http','https') == true)
+                            <img src="{{$company->documents}}" class="img-fluid doc-preview mb-2 d-block" alt="..." width="30%">
+                        @else
+                        <img src="{{asset('storage/'. $company->documents)}}" class="img-fluid doc-preview mb-2 d-block" alt="..." width="30%">
+                        @endif
+                    @else
+                    <img src="https://media.istockphoto.com/vectors/contract-or-document-signing-icon-document-folder-with-stamp-and-text-vector-id1179640294?k=20&m=1179640294&s=612x612&w=0&h=O2IBtlV52-6gWSAeyozPIFkfZ-LzHnpXBw2tOuUToj8=" class="img-fluid doc-preview mb-2 d-block" alt="..." width="30%">
+                    @endif
+                    {{-- <img  src="" alt="" class="img-fluid doc-preview mb-2"> --}}
                     <div class="input-group">
                         <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="inputGroupFile01">
+                          <input name="dokumen" type="file" class="custom-file-input"  id="dok" onchange="previewDocument()">
                           <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                         </div>
                     </div>
-                    <img src="img/sku.jpg" class="img-thumbnail" alt="...">
                 </div>
             </div>
             <div class="col-md">
                 <div class="form-group">
                     <label for="exampleFormControlFile1">Foto Usaha</label>
+                    @if ($company->photos)
+                        @if (str_contains($company->photos, 'http','https') == true)
+                            <img src="{{$company->photos}}" class="img-fluid img-preview mb-2 d-block" alt="..." width="30%">
+                        @else
+                        <img src="{{asset('storage/'. $company->photos)}}" class="img-fluid img-preview mb-2 d-block" alt="..." width="30%">
+                        @endif
+                    @else
+                    <img src="https://cdn1-production-images-kly.akamaized.net/Qv3K-G5ZO24Kfcn-EPw12PtiOaE=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3165463/original/001411700_1593427405-table-in-vintage-restaurant-6267.jpg" class="img-fluid img-preview mb-2 d-block" alt="..." width="30%">
+                    @endif
+                    {{-- <img  src="" alt="" class="img-fluid img-preview mb-2"> --}}
                     <div class="input-group">
                         <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="inputGroupFile01">
+                          <input name="foto" type="file" class="custom-file-input" id="foto" onchange="previewImage()">
                           <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                         </div>
                     </div>
-                    <img src="dist/img/photo1.png" class="img-thumbnail" alt="...">
                 </div>
             </div>
         </div>
@@ -147,17 +245,15 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="exampleSelectBorder">Ubah Status Verifikasi</label>
-            <select class="custom-select form-control-border" id="exampleSelectBorder" required="required">
-              <option>Terverifikasi</option>
-              <option>Belum diverifikasi</option>
-              <option>Ditolak</option>
-            </select>
-        </div>
+        
 
       </div>
       <!-- /.card-body -->
+
+      {{-- input lokasi --}}
+      <input type="hidden" name="lat" value="{{$company->latitude}}" id="lat"> 
+      <input type="hidden" name="lng" value="{{$company->longitude}}" id="lng"> 
+
 
       <div class="card-footer">
         <button type="submit" class="btn btn-primary btn-block btn-lg">Simpan</button>

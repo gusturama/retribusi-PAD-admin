@@ -34,8 +34,44 @@
 			var lng = coord[1].split(')');
 			console.log(lng);
 			myMarker.bindPopup("<b>Koordinat:</b> <br>Lat:" + lat[1] + "<br>Lng:" + lng[0] + ".");
-		});
 
+            $("#lat").val(lat[1]);
+            $("#lng").val(lng[0]);
+
+            
+		});
+    
+        function previewImage(){
+            const image = document.querySelector('#foto');
+            const imgPreview = document.querySelector('.img-preview');
+
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+
+            oFReader.onload = function(oFREvent){
+            imgPreview.src = oFREvent.target.result;
+            imgPreview.style.width = '400px';
+            // imgPreview.style.height = '200px';     
+            }
+        }
+
+        function previewDocument(){
+            const dokumen = document.querySelector('#dok');
+            const docPreview = document.querySelector('.doc-preview');
+
+            docPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(dokumen.files[0]);
+
+            oFReader.onload = function(oFREvent){
+            docPreview.src = oFREvent.target.result;
+            docPreview.style.width = '400px';
+            // imgPreview.style.height = '200px';     
+            }
+        }
     </script>
     
 @endsection
@@ -54,72 +90,89 @@
     </div>
     <!-- /.card-header -->
     <!-- form start -->
-    <form>
+    @if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+  @endif
+    <form method="POST" enctype="multipart/form-data" action="{{ route('usaha-store') }}">
+        @csrf
       <div class="card-body">
         <div class="form-group">
           <label>Nama Usaha</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukan nama usaha " required="required">
+          <input type="text" name="nama_usaha" class="form-control" id="exampleInputEmail1" placeholder="Masukan nama usaha " required="required">
         </div>
         <div class="form-group">
             <label for="exampleSelectBorder">Pilih Pemilik Usaha</label>
-            <select class="custom-select form-control-border" id="exampleSelectBorder" required="required">
-              <option>Pemilik Usaha 1</option>
-              <option>Pemilik Usaha 2</option>
-              <option>Pemilik Usaha 3</option>
+            <select name="pemilik" class="custom-select form-control-border" id="exampleSelectBorder" required="required">
+              @foreach ($owners as $owner)
+                  <option value="{{$owner->id}}">{{$owner->name}}</option>
+              @endforeach
             </select>
         </div>
         <div class="row">
             <div class="col-md">
                 <div class="form-group">
                     <label>Jenis Usaha</label>
-                    <select class="custom-select form-control-border" id="exampleSelectBorder" required="required">
-                        <option>Jenis Usaha 1</option>
-                        <option>Jenis Usaha 2</option>
-                        <option>Jenis Usaha 3</option>
+                    <select name="jenis_usaha" class="custom-select form-control-border" id="exampleSelectBorder" required="required">
+                        @foreach ($company_types as $company_type)
+                            <option value="{{$company_type->id}}"> {{$company_type->type}}</option>
+                        @endforeach
                     </select>
                   </div>
             </div>
-            <div class="col-md">
-                <label>Skala Usaha</label>
-                <select class="custom-select form-control-border" id="exampleSelectBorder" required="required">
-                    <option>Besar</option>
-                    <option>Menengah</option>
-                    <option>Kecil</option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-md">
                 <div class="form-group">
                     <label>Banjar</label>
-                    <select class="custom-select form-control-border" id="exampleSelectBorder" required="required">
-                        <option>Banjar 1</option>
-                        <option>Banjar 2</option>
-                        <option>Banjar 3</option>
+                    <select name="banjar" class="custom-select form-control-border" id="exampleSelectBorder" required="required">
+                        @foreach ($banjars as $banjar)
+                            <option value="{{$banjar->id}}">{{$banjar->name}}</option>
+                        @endforeach
                     </select>
                   </div>
             </div>
-            <div class="col-md">
-                <label>Tempekan</label>
-                <select class="custom-select form-control-border" id="exampleSelectBorder" required="required">
-                    <option>Tempekan 1</option>
-                    <option>Tempekan 2</option>
-                    <option>Tempekan 3</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Alamat</label>
-            <textarea name="" class="form-control" rows="2"></textarea>
         </div>
 
         <div class="row">
             <div class="col-md">
                 <div class="form-group">
-                    <label for="exampleFormControlFile1">Foto Surat</label>
+                    <label>Jenis Pembayaran Iuran</label>
+                    <select name="kategori" class="custom-select form-control-border" id="exampleSelectBorder" required="required">
+                        @foreach ($subscription_types as $subs_type)
+                            <option value="{{$subs_type->id}}"> {{$subs_type->category}}</option>
+                        @endforeach
+                    </select>
+                  </div>
+            </div>
+            <div class="col-md">
+                <div class="form-group">
+                    <label>Skala Usaha</label>
+                    <select name="skala" class="custom-select form-control-border" id="exampleSelectBorder" required="required">
+                        @foreach ($company_scales as $comp_scale)
+                            <option value="{{$comp_scale->id}}">{{$comp_scale->scale}}</option>
+                        @endforeach
+                    </select>
+                  </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Alamat</label>
+            <textarea name="alamat" class="form-control" rows="2"></textarea>
+        </div>
+
+        <div class="row">
+            <div class="col-md">
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Dokumen</label>
+                    <img  src="" alt="" class="img-fluid doc-preview mb-2">
                     <div class="input-group">
                         <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="inputGroupFile01">
+                          <input name="dokumen" type="file" class="custom-file-input"  id="dok" onchange="previewDocument()">
                           <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                         </div>
                     </div>
@@ -128,9 +181,10 @@
             <div class="col-md">
                 <div class="form-group">
                     <label for="exampleFormControlFile1">Foto Usaha</label>
+                    <img  src="" alt="" class="img-fluid img-preview mb-2">
                     <div class="input-group">
                         <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="inputGroupFile01">
+                          <input name="foto" type="file" class="custom-file-input" id="foto" onchange="previewImage()">
                           <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                         </div>
                     </div>
@@ -145,17 +199,22 @@
             </div>
         </div>
 
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label for="exampleSelectBorder">Status Verifikasi</label>
-            <select class="custom-select form-control-border" id="exampleSelectBorder" required="required">
-              <option>Terverifikasi</option>
-              <option>Belum diverifikasi</option>
-              <option>Ditolak</option>
+            <select name="status" class="custom-select form-control-border" id="exampleSelectBorder" required="required">
+              <option value="verified">Terverifikasi</option>
+              <option value="wait_verified">Belum diverifikasi</option>
+              <option value="blocked">Ditolak</option>
             </select>
-        </div>
+        </div> --}}
 
       </div>
       <!-- /.card-body -->
+
+      {{-- input lokasi --}}
+      <input type="hidden" name="lat" value="" id="lat"> 
+      <input type="hidden" name="lng" value="" id="lng"> 
+
 
       <div class="card-footer">
         <button type="submit" class="btn btn-primary btn-block btn-lg">Simpan</button>

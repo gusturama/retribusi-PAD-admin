@@ -24,4 +24,8 @@ class Banjar extends Model
     {
         return $this->hasMany(Staff::class);
     }
+    public function companies()
+    {
+        return $this->hasMany(Company::class);
+    }
 }

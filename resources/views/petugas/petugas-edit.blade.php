@@ -24,15 +24,18 @@
 @endif
 
     <form method="POST" enctype="multipart/form-data" action="{{ route('petugas-update', $user->id) }}">
-      @if ($user->photo)
-            <div class="foto-profil text-center">
-                <img style="width: 200px; height:200px;" src="{{asset('storage/'. $user->photo)}}" class="img-thumbnail rounded" alt="foto user">
-            </div>
+      {{-- foto profil --}}
+      <div class="foto-profil text-center">
+        @if ($user->photo)
+            @if (str_contains($user->photo, 'http','https') == true)
+              <img style="width: 200px; height:200px;" src="{{$user->photo}}" class="img-thumbnail rounded" alt="foto user">
             @else
-            <div class="foto-profil text-center">
-                <img style="width: 200px; height:200px;" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" class="img-thumbnail rounded" alt="foto user">
-            </div>
+              <img style="width: 200px; height:200px;" src="{{asset('storage/'. $user->photo)}}" class="img-thumbnail rounded" alt="foto aset">
+            @endif
+        @else
+        <img style="width: 200px; height:200px;" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" class="img-thumbnail rounded" alt="foto user">
         @endif
+      </div>
 
       @csrf
       <div class="card-body">

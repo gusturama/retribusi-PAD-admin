@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Subscription;
+use App\Models\SubscriptionType;
 use Illuminate\Http\Request;
 
-class SubscriptionController extends Controller
+class SubscriptionTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,7 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        $subs1 = Subscription::find(1);
-        dd($subs1->company_scale->scale);
-            
+        //
     }
 
     /**
@@ -26,8 +24,7 @@ class SubscriptionController extends Controller
      */
     public function create()
     {
-        
-        
+        //
     }
 
     /**
@@ -44,10 +41,10 @@ class SubscriptionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Subscription  $subscription
+     * @param  \App\Models\SubsriptionType  $subsriptionType
      * @return \Illuminate\Http\Response
      */
-    public function show(Subscription $subscription)
+    public function show(SubsriptionType $subsriptionType)
     {
         //
     }
@@ -55,10 +52,10 @@ class SubscriptionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Subscription  $subscription
+     * @param  \App\Models\SubsriptionType  $subsriptionType
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subscription $subscription)
+    public function edit(SubsriptionType $subsriptionType)
     {
         //
     }
@@ -67,10 +64,10 @@ class SubscriptionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Subscription  $subscription
+     * @param  \App\Models\SubsriptionType  $subsriptionType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Subscription $subscription)
+    public function update(Request $request, SubsriptionType $subsriptionType)
     {
         //
     }
@@ -78,10 +75,10 @@ class SubscriptionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Subscription  $subscription
+     * @param  \App\Models\SubsriptionType  $subsriptionType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subscription $subscription)
+    public function destroy(SubsriptionType $subsriptionType)
     {
         //
     }

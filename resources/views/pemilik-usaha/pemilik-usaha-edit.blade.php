@@ -24,15 +24,17 @@
 @endif
 
     <form method="POST" enctype="multipart/form-data" action="{{ route('pemilik-usaha-update', $user->id) }}">
-      @if ($user->photo)
-            <div class="foto-profil text-center">
-                <img style="width: 200px; height:200px;" src="{{asset('storage/'. $user->photo)}}" class="img-thumbnail rounded" alt="foto user">
-            </div>
+      <div class="foto-profil text-center mb-2">
+        @if ($user->photo)
+            @if (str_contains($user->photo, 'http','https') == true)
+              <img style="width: 200px; height:200px;" src="{{$user->photo}}" class="img-thumbnail rounded" alt="foto user">
             @else
-            <div class="foto-profil text-center">
-                <img style="width: 200px; height:200px;" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" class="img-thumbnail rounded" alt="foto user">
-            </div>
+              <img style="width: 200px; height:200px;" src="{{asset('storage/'. $user->photo)}}" class="img-thumbnail rounded" alt="foto aset">
+            @endif
+        @else
+        <img style="width: 200px; height:200px;" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" class="img-thumbnail rounded" alt="foto user">
         @endif
+      </div>
 
       @csrf
       <div class="card-body">
@@ -51,14 +53,20 @@
 
       <div class="form-group">
           <label for="exampleFormControlFile1">Ubah Foto Profil (opsional)</label>
-          <div class="mb-2" style="width: 200px; height:200px;">
-            @if ($user->photo)
-            <img  src="{{asset('storage/'. $user->photo)}}" alt="" class="img-fluid img-preview">
-            @else
-            <img  src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="" class="img-fluid img-preview">
-            @endif
+          
+            <div class="foto-profil text-center">
+              @if ($user->photo)
+                  @if (str_contains($user->photo, 'http','https') == true)
+                    <img style="width: 200px; height:200px;" src="{{$user->photo}}" class="img-thumbnail rounded" alt="foto user">
+                  @else
+                    <img style="width: 200px; height:200px;" src="{{asset('storage/'. $user->photo)}}" class="img-thumbnail rounded" alt="foto aset">
+                  @endif
+              @else
+              <img style="width: 200px; height:200px;" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" class="img-thumbnail rounded" alt="foto user">
+              @endif
+            </div>
 
-          </div>
+          
           <div class="input-group">
               <div class="custom-file">
                 <input type="file" name="foto" class="custom-file-input" id="foto" onchange="previewImage()">

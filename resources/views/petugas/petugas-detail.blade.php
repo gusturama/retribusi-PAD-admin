@@ -16,15 +16,17 @@
         </div>
         <div class="card-body text-lg">
             {{-- foto profil --}}
-            @if ($user->photo)
             <div class="foto-profil text-center">
-                <img style="width: 200px; height:200px;" src="{{asset('storage/'. $user->photo)}}" class="img-thumbnail rounded" alt="foto user">
-            </div>
-            @else
-            <div class="foto-profil text-center">
+                @if ($user->photo)
+                    @if (str_contains($user->photo, 'http','https') == true)
+                      <img style="width: 200px; height:200px;" src="{{$user->photo}}" class="img-thumbnail rounded" alt="foto user">
+                    @else
+                      <img style="width: 200px; height:200px;" src="{{asset('storage/'. $user->photo)}}" class="img-thumbnail rounded" alt="foto aset">
+                    @endif
+                @else
                 <img style="width: 200px; height:200px;" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" class="img-thumbnail rounded" alt="foto user">
-            </div>
-            @endif
+                @endif
+              </div>
            
             {{-- data profil --}}
             <strong></i>Nama</strong>

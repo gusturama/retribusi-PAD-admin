@@ -52,6 +52,8 @@ class StaffController extends Controller
             'foto' => 'image|file|max:2048'
         ]);
 
+        $foto = '';
+
         if ($request->file('foto')) {
             $foto = $request->file('foto')->store('user-photos');
         }

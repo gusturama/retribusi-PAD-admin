@@ -5,17 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CompanyScale extends Model
+class SubscriptionType extends Model
 {
     use HasFactory;
-    protected $table = 'company_scales';
-
+    protected $table = 'subscription_types';
     protected $guarded = [
         'id'
     ];
-
-
-public function subscriptions()
+    public function subscriptions()
     {
         return $this->hasMany(Subscription::class);
     }
