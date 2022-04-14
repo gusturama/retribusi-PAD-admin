@@ -38,8 +38,8 @@
         <thead>
         <tr>
             <th>No.</th>
-            <th>Nama Petugas</th>
             <th>Nama Usaha</th>
+            <th>Nama Petugas</th>
             <th>Nominal Iuran</th>
             <th>Nominal Dibayarkan</th>
             <th class="text-center">Aksi</th>

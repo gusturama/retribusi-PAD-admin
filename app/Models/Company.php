@@ -35,4 +35,8 @@ class Company extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+    public function companies_unpaid_transactions()
+    {
+        return $this->hasMany(CompaniesUnpaidTransaction::class);
+    }
 }

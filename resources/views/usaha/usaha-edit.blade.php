@@ -152,7 +152,7 @@
                     <label>Banjar</label>
                     <select name="banjar" class="custom-select form-control-border" id="exampleSelectBorder" required="required">
                         @foreach ($banjars as $banjar)
-                            <option value="{{$banjar->id}}" @if ($banjar->id == $company->banjar->id)
+                            <option value="{{$banjar->id}}" @if ($banjar->id == $company->banjar['id'])
                                 selected
                             @endif>{{$banjar->name}}</option>
                         @endforeach

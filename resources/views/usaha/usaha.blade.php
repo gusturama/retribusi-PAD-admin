@@ -45,7 +45,12 @@
             <td>{{$i++}}</td>
             <td>{{$company->name}}</td>
             <td>{{$company->user->name}}</td>
-            <td>{{$company->banjar['name']}}</td>
+            <td>
+                @if ($company->banjar['name'] == null)
+                Belum dipilih
+                @else
+                {{ $company->banjar['name'] }}
+                @endif</td>
             <td class="text-center fit">
                 @if ($company->status == 'wait_verified')
                     <div class="btn btn-block btn-warning" style="cursor: default;"><span class="fas fa-circle-notch"></span>     

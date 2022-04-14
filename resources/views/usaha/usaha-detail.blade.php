@@ -107,7 +107,10 @@
             <hr>
             <strong></i>Banjar</strong>
             <p class="text-muted">
-                {{$company->banjar->name}}
+                @if ($company->banjar['name'] == null)
+                    Banjar belum dipilih
+                @endif
+                {{$company->banjar['name']}}
             </p>
             <hr>
             <strong></i>Alamat</strong>
@@ -123,7 +126,7 @@
             <strong></i>Dokumen</strong>
             <p class="text-muted">
             @if ($company->documents)
-                @if (str_contains($company->documents, 'http://','https://') == true)
+                @if (str_contains($company->documents, 'http','https') == true)
                     <img src="{{$company->documents}}" class="img-thumbnail rounded" alt="..." width="30%">
                 @else
                 <img src="{{asset('storage/'. $company->documents)}}" class="img-thumbnail rounded" alt="..." width="30%">

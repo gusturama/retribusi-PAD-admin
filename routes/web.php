@@ -9,6 +9,7 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\BanjarController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\TempekanController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CompanyTypeController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CompanyScaleController;
@@ -37,11 +38,6 @@ Route::get('/template', function () {
 
 Route::middleware('auth')->group(function(){
 
-    Route::get('/', function () {
-        return view('dashboard', [
-            "title" => "Dashboard"
-        ]);
-    });
             
     Route::get('/iuran', function () {
         return view('iuran/iuran', [
@@ -60,6 +56,10 @@ Route::middleware('auth')->group(function(){
             "title" => "Edit Iuran"
         ]);
     });
+
+    // dashboard
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard-index');
+
 
     // transaksi
     Route::get('/transaksi', [TransactionDetailController::class, 'index'])->name('transaksi-index');

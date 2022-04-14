@@ -9,7 +9,9 @@ use App\Models\CompanyType;
 use App\Models\CompanyScale;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Models\SubscriptionType;
+use App\Models\CompaniesUnpaidTransaction;
 
 class CompanyController extends Controller
 {
@@ -184,9 +186,20 @@ class CompanyController extends Controller
         }
 
         // auto insert data ke tabel unpaid ketika status company/usaha dirubah menjadi "verified"
-        // if ($request->status == "verified") {
-        //     # code...
-        // }
+        if ($comp->status != "verified" && $request->status == "verified") {
+            // insert ke unpaid
+            $unpaid = CompaniesUnpaidTransaction::create([
+                "company_id" => $comp->id,
+                "subscription_type_id" => $comp->subscription->subscription_type->id,
+                "company_scale_id" => $comp->subscription->company_scale->id,
+                "amount" => $comp->subscription->subscription_amount,
+                "unpaid_at" => Carbon::now(),
+            ]);
+            // update kolom verified_at di tabel companies
+            $company = Company::where('id', $id)->update([
+                "verified_at" => Carbon::now()->setTimeZone('Asia/Makassar'),
+            ]);
+        }
 
         $company = Company::where('id', $id)->update([
             "user_id" => $request->pemilik,
