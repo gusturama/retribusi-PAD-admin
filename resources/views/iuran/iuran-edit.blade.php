@@ -13,47 +13,32 @@
     </div>
     <!-- /.card-header -->
     <!-- form start -->
-    <form>
+    <form method="POST" action="{{ route('iuran-update', $sub->id) }}">
+      @csrf
+      
       <div class="card-body">
         <div class="row">
-            <div class="col-md">
-                <div class="form-group">
-                    <label for="exampleSelectBorder">Jenis Usaha</label>
-                    <select class="custom-select form-control-border" id="exampleSelectBorder" required="required">
-                      <option>Hotel/Penginapan</option>
-                      <option>Restoran</option>
-                      <option>Usaha Dagang</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="form-group">
-                    <label for="exampleSelectBorder">Skala Usaha</label>
-                    <select class="custom-select form-control-border" id="exampleSelectBorder" required="required">
-                      <option>Besar</option>
-                      <option>Menengah</option>
-                      <option>Kecil</option>
-                    </select>
-                </div>
-            </div>
+          <div class="col-md">
+            <div class="form-group">
+              <label>Skala Usaha</label>
+              <input type="text" class="form-control" name="nama_jenis_usaha" value="{{$sub->company_scale->scale}}" disabled>
+            </div> 
+          </div>
+
+          <div class="col-md">
+            <div class="form-group">
+              <label>Jenis Iuran</label>
+              <input type="text" class="form-control" name="nama_jenis_usaha" value="{{$sub->subscription_type->category}}" disabled>
+            </div> 
+          </div>
+
         </div>
-        <div class="row">
-            <div class="col-md">
-                <div class="form-group">
-                    <label for="exampleSelectBorder">Jenis Pembayaran</label>
-                    <select class="custom-select form-control-border" id="exampleSelectBorder" required="required">
-                      <option>Bulanan</option>
-                      <option>Harian</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="form-group">
-                    <label>Nominal Iuran</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" value="50000" required="required">
-                  </div>
-            </div>
-        </div>
+        
+        <div class="form-group">
+          <label>Nominal Iuran</label>
+          <input type="number" class="form-control" name="nominal" value="{{$sub->subscription_amount}}" required>
+        </div> 
+        
         
       </div>
       <!-- /.card-body -->

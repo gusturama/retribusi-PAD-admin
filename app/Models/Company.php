@@ -31,4 +31,8 @@ class Company extends Model
     {
         return $this->belongsTo(Subscription::class);
     }
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

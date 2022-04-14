@@ -14,8 +14,10 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        $subs1 = Subscription::find(1);
-        dd($subs1->company_scale->scale);
+        $title = "Data Iuran";
+        $subs = Subscription::all();
+        return view('iuran.iuran', compact('title','subs'));
+
             
     }
 
@@ -58,9 +60,11 @@ class SubscriptionController extends Controller
      * @param  \App\Models\Subscription  $subscription
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subscription $subscription)
+    public function edit($id)
     {
-        //
+        $title = 'Edit Iuran';
+        $sub = Subscription::find($id);
+        return view('iuran.iuran-edit', compact('sub', 'title'));
     }
 
     /**
@@ -70,9 +74,19 @@ class SubscriptionController extends Controller
      * @param  \App\Models\Subscription  $subscription
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Subscription $subscription)
+    public function update(Request $request, $id)
     {
-        //
+         //melakukan validasi data
+         $request->validate([
+            'nominal' => 'required'
+        ]);
+
+        Subscription::find($id)->update([
+            'subscription_amount' => $request->nominal
+        ]);
+
+        return redirect()->route('iuran-index')
+            ->with('success', 'Data Iuran berhasil dirubah');
     }
 
     /**

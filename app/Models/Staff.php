@@ -20,7 +20,12 @@ class Staff extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function banjar(){
+    public function banjar()
+    {
         return $this->belongsTo(Banjar::class);
+    }
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
     }
 }

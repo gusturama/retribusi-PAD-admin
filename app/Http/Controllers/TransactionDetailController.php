@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaction;
+use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
 
-class TransactionController extends Controller
+class TransactionDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
-        $trans = Transaction::all();
+        $trans = TransactionDetail::all();
         $title = "Data Transaksi";
         return view('transaksi.transaksi', compact('trans', 'title'));
     }
@@ -44,10 +43,10 @@ class TransactionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Transaction  $transaction
+     * @param  \App\Models\TransactionDetail  $transactionDetail
      * @return \Illuminate\Http\Response
      */
-    public function show(Transaction $transaction)
+    public function show(TransactionDetail $transactionDetail)
     {
         //
     }
@@ -55,10 +54,10 @@ class TransactionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Transaction  $transaction
+     * @param  \App\Models\TransactionDetail  $transactionDetail
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaction $transaction)
+    public function edit(TransactionDetail $transactionDetail)
     {
         //
     }
@@ -67,10 +66,10 @@ class TransactionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Transaction  $transaction
+     * @param  \App\Models\TransactionDetail  $transactionDetail
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(Request $request, TransactionDetail $transactionDetail)
     {
         //
     }
@@ -78,10 +77,10 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Transaction  $transaction
+     * @param  \App\Models\TransactionDetail  $transactionDetail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $transaction)
+    public function destroy(TransactionDetail $transactionDetail)
     {
         //
     }

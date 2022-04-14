@@ -211,8 +211,10 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Company $company)
+    public function destroy($id)
     {
-        //
+        Company::find($id)->delete();
+        return redirect()->route('usaha-index')
+            ->with('success', 'Pemilik Usha Berhasil Dihapus');
     }
 }

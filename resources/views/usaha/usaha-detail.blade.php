@@ -115,6 +115,11 @@
                 {{$company->address}}
             </p>
             <hr>
+            <strong></i>Nominal Iuran</strong>
+            <p class="text-muted">
+                {{$company->subscription->subscription_amount}}
+            </p>
+            <hr>
             <strong></i>Dokumen</strong>
             <p class="text-muted">
             @if ($company->documents)

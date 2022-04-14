@@ -211,7 +211,7 @@
                                 <li class="nav-item">
                                     <a href="/iuran" class="nav-link {{ Request::is('iuran*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-money-bill"></i>
-                                    <p>Jenis Iuran</p>
+                                    <p>Iuran</p>
                                     </a>
                                 </li>
                                 {{-- <li class="nav-item">
@@ -235,14 +235,7 @@
                                 <i class="fas fa-money-check"></i>
                                 <p>Transaksi</p>
                                 </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/transaksi" class="nav-link {{ Request::is('transaksi*') ? 'active' : '' }}">
-                                <i class="fas fa-money-check"></i>
-                                <p>Iuran</p>
-                                </a>
-                            </li>
-                            
+                            </li>                        
                             
 
                         </ul>

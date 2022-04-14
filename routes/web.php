@@ -13,6 +13,7 @@ use App\Http\Controllers\CompanyTypeController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CompanyScaleController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\TransactionDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,8 +61,14 @@ Route::middleware('auth')->group(function(){
         ]);
     });
 
-    Route::get('/subscription', [SubscriptionController::class, 'index'])->name('usaha-index');
-    
+    // transaksi
+    Route::get('/transaksi', [TransactionDetailController::class, 'index'])->name('transaksi-index');
+    Route::get('/transaksi-edit/{id}', [TransactionDetailController::class, 'edit'])->name('transaksi-edit');
+
+    // iuran cuma bisa diubah jumlahnya
+    Route::get('/iuran', [SubscriptionController::class, 'index'])->name('iuran-index');
+    Route::get('/iuran-edit/{id}', [SubscriptionController::class, 'edit'])->name('iuran-edit');
+    Route::post('/iuran-update/{id}', [SubscriptionController::class, 'update'])->name('iuran-update');
     
     // usaha / company
     Route::get('/usaha', [CompanyController::class, 'index'])->name('usaha-index');
@@ -127,25 +134,6 @@ Route::middleware('auth')->group(function(){
     
 
     
-    // transaksi
-    Route::get('/transaksi', [TransactionController::class, 'index']);
     
-    Route::get('/transaksi-tambah', function () {
-        return view('transaksi/transaksi-tambah', [
-            "title" => "Tambah Transaksi"
-        ]);
-    });
-    
-    Route::get('/transaksi-edit', function () {
-        return view('transaksi/transaksi-edit', [
-            "title" => "Edit Transaksi"
-        ]);
-    });
-    
-    Route::get('/transaksi-detail', function () {
-        return view('transaksi/transaksi-detail', [
-            "title" => "Detail Transaksi"
-        ]);
-    });
     
 });
