@@ -36,26 +36,8 @@ Route::get('/template', function () {
     return view('template');
 });
 
+// login admin
 Route::middleware('auth')->group(function(){
-
-            
-    Route::get('/iuran', function () {
-        return view('iuran/iuran', [
-            "title" => "Iuran"
-        ]);
-    });
-    
-    Route::get('/iuran-tambah', function () {
-        return view('iuran/iuran-tambah', [
-            "title" => "Tambah Iuran"
-        ]);
-    });
-    
-    Route::get('/iuran-edit', function () {
-        return view('iuran/iuran-edit', [
-            "title" => "Edit Iuran"
-        ]);
-    });
 
     // dashboard
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard-index');

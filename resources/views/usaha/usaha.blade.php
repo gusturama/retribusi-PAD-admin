@@ -4,6 +4,7 @@
         $(function () {
             $("#example1").DataTable({
             "responsive": true, "lengthChange": false, "autoWidth": false,
+            "order": [[ 3, "desc" ]]
             // "buttons": ["copy", "csv", "excel", "pdf", "print"]
             })
         });
@@ -28,7 +29,7 @@
         <table id="example1" class="table table-bordered table-hover">
         <thead>
         <tr>
-            <th>No</th>
+            {{-- <th>No</th> --}}
             <th class="align-middle">Nama Usaha</th>
             <th>Nama Pemilik</th>
             <th class="align-middle">Banjar</th>
@@ -42,7 +43,7 @@
         @endphp
         @foreach ($companies as $company)
         <tr>
-            <td>{{$i++}}</td>
+            {{-- <td>{{$i++}}</td> --}}
             <td>{{$company->name}}</td>
             <td>{{$company->user->name}}</td>
             <td>
