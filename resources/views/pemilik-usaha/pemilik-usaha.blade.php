@@ -29,7 +29,7 @@
         <thead>
         <tr>
             <th>No</th>
-            <th>Nama Petugas</th>
+            <th>Nama</th>
             <th>Email</th>
             <th>No HP</th>
             <th class="text-center">Aksi</th>
