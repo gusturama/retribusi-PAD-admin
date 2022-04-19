@@ -25,7 +25,7 @@
 
     <form method="POST" enctype="multipart/form-data" action="{{ route('petugas-update', $user->id) }}">
       {{-- foto profil --}}
-      <div class="foto-profil text-center">
+      {{-- <div class="foto-profil text-center">
         @if ($user->photo)
             @if (str_contains($user->photo, 'http','https') == true)
               <img style="width: 200px; height:200px;" src="{{$user->photo}}" class="img-thumbnail rounded" alt="foto user">
@@ -35,51 +35,71 @@
         @else
         <img style="width: 200px; height:200px;" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" class="img-thumbnail rounded" alt="foto user">
         @endif
-      </div>
+      </div> --}}
 
       @csrf
       <div class="card-body">
-        <div class="form-group">
-          <label>Nama</label>
-          <input type="text" name="nama" class="form-control" value="{{$user->name}}" required="required">
+        <div class="row">
+          <div class="col-md">
+            <div class="form-group">
+              <label>Nama</label>
+              <input type="text" name="nama" class="form-control" value="{{$user->name}}" required="required">
+            </div> 
+          </div>
+          <div class="col-md">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" name="email" class="form-control" value="{{$user->email}}" required="required">
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" name="email" class="form-control" value="{{$user->email}}" required="required">
+        
+        <div class="row">
+          <div class="col-md">
+            <div class="form-group">
+              <label>Nomor HP</label>
+              <input type="text" name="no_hp" class="form-control" value="{{$user->phone}}" required="required">
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="form-group">
+              <label for="exampleSelectBorder">Pilih Banjar</label>
+              <select class="custom-select form-control-border" name="banjar" id="exampleSelectBorder">
+                @foreach ($banjars as $banjar)
+                    <option value="{{$banjar->id}}" @if ($banjar->id == $user->staff->banjar_id)
+                        selected
+                    @endif> {{$banjar->name}}</option>
+                @endforeach
+                <option></option>
+              </select>
+          </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label>Nomor HP</label>
-          <input type="text" name="no_hp" class="form-control" value="{{$user->phone}}" required="required">
-        </div>
-        <div class="form-group">
-          <label for="exampleSelectBorder">Pilih Banjar</label>
-          <select class="custom-select form-control-border" name="banjar" id="exampleSelectBorder">
-            @foreach ($banjars as $banjar)
-                <option value="{{$banjar->id}}" @if ($banjar->id == $user->staff->banjar_id)
-                    selected
-                @endif> {{$banjar->name}}</option>
-            @endforeach
-            <option></option>
-          </select>
-      </div>
-    
-      <div class="form-group">
-          <label for="exampleFormControlFile1">Ubah Foto Profil (opsional)</label>
-          <div class="mb-2" style="width: 200px; height:200px;">
-            @if ($user->photo)
-            <img  src="{{asset('storage/'. $user->photo)}}" alt="" class="img-fluid img-preview">
-            @else
-            <img  src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="" class="img-fluid img-preview">
-            @endif
+      <div class="row">
+        <div class="col-md">
+          
+          <div class="form-group">
+            <label for="exampleFormControlFile1">Ubah Foto Profil (opsional)</label>
+            <div class="mb-2" style="width: 200px; height:200px;">
+              @if ($user->photo)
+              <img  src="{{asset('storage/'. $user->photo)}}" alt="" class="img-fluid img-preview">
+              @else
+              <img  src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="" class="img-fluid img-preview">
+              @endif
+  
+            </div>
+            <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" name="foto" class="custom-file-input" id="foto" onchange="previewImage()">
+                  <label class="custom-file-label" for="inputGroupFile01">Pilih file</label>
+                </div>
+            </div>
+          </div>
 
-          </div>
-          <div class="input-group">
-              <div class="custom-file">
-                <input type="file" name="foto" class="custom-file-input" id="foto" onchange="previewImage()">
-                <label class="custom-file-label" for="inputGroupFile01">Pilih file</label>
-              </div>
-          </div>
+        </div>
+        <div class="col-md"></div>
       </div>
+      
       </div>
       <!-- /.card-body -->
 

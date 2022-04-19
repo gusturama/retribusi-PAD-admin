@@ -51,12 +51,12 @@
             <div class="foto-profil text-center mb-3">
                 @if ($company->photos)
                     @if (str_contains($company->photos, 'http','https') == true)
-                        <img src="{{$company->photos}}" class="img-thumbnail rounded" alt="..." width="30%">
+                        <img src="{{$company->photos}}" class="img-thumbnail rounded" alt="..." width="20%">
                     @else
-                    <img src="{{asset('storage/'. $company->photos)}}" class="img-thumbnail rounded" alt="..." width="30%">
+                    <img src="{{asset('storage/'. $company->photos)}}" class="img-thumbnail rounded" alt="..." width="20%">
                     @endif
                 @else
-                <img src="https://cdn1-production-images-kly.akamaized.net/Qv3K-G5ZO24Kfcn-EPw12PtiOaE=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3165463/original/001411700_1593427405-table-in-vintage-restaurant-6267.jpg" class="img-thumbnail rounded" alt="..." width="30%">
+                <img src="https://cdn1-production-images-kly.akamaized.net/Qv3K-G5ZO24Kfcn-EPw12PtiOaE=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3165463/original/001411700_1593427405-table-in-vintage-restaurant-6267.jpg" class="img-thumbnail rounded" alt="..." width="20%">
                 @endif
                 <div class="strong text-center">Foto Usaha</div>
             </div>
@@ -78,51 +78,83 @@
                     Terverifikasi
                 @else
                     Diblokir
-                @endif</div>
-            </p>
-            <strong></i>Nama Usaha</strong>
-            <p class="text-muted">
-            {{$company->name}} 
-            </p>
-            <hr>
-            <strong></i>Nama Pemilik</strong>
-            <p class="text-muted">
-                {{$company->user->name}} 
-            </p>
-            <hr>
-            <strong></i>Jenis Usaha</strong>
-            <p class="text-muted">
-                {{$company->company_type->type}}
-            </p>
-            <hr>
-            <strong></i>Skala Usaha</strong>
-            <p class="text-muted">
-                {{$company->subscription->company_scale->scale}}
-            </p>
-            <hr>
-            <strong></i>Jenis Iuran</strong>
-            <p class="text-muted">
-                {{$company->subscription->subscription_type->category}}
-            </p>
-            <hr>
-            <strong></i>Banjar</strong>
-            <p class="text-muted">
-                @if ($company->banjar['name'] == null)
-                    Banjar belum dipilih
                 @endif
-                {{$company->banjar['name']}}
-            </p>
-            <hr>
-            <strong></i>Alamat</strong>
-            <p class="text-muted">
-                {{$company->address}}
-            </p>
-            <hr>
-            <strong></i>Nominal Iuran</strong>
-            <p class="text-muted">
-                {{$company->subscription->subscription_amount}}
-            </p>
-            <hr>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md">
+                    
+                    <strong></i>Nama Usaha</strong>
+                    <p class="text-muted">
+                    {{$company->name}} 
+                    </p>
+                    <hr>
+                    
+                </div>
+                <div class="col-md">
+                    <strong></i>Nama Pemilik</strong>
+                    <p class="text-muted">
+                        {{$company->user->name}} 
+                    </p>
+                    <hr>
+                    
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md">
+                    <strong></i>Jenis Usaha</strong>
+                    <p class="text-muted">
+                        {{$company->company_type->type}}
+                    </p>
+                    <hr>
+                </div>
+                <div class="col-md">
+                    <strong></i>Skala Usaha</strong>
+                    <p class="text-muted">
+                        {{$company->subscription->company_scale->scale}}
+                    </p>
+                    <hr>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md">
+                    <strong></i>Jenis Iuran</strong>
+                    <p class="text-muted">
+                        {{$company->subscription->subscription_type->category}}
+                    </p>
+                    <hr>
+                </div>
+                <div class="col-md">
+                    <strong></i>Banjar</strong>
+                    <p class="text-muted">
+                        @if ($company->banjar['name'] == null)
+                            Banjar belum dipilih
+                        @endif
+                        {{$company->banjar['name']}}
+                    </p>
+                    <hr>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md">
+                    <strong></i>Alamat</strong>
+                    <p class="text-muted">
+                        {{$company->address}}
+                    </p>
+                    <hr>
+                </div>
+                <div class="col-md">
+                    <strong></i>Nominal Iuran</strong>
+                    <p class="text-muted">
+                        {{$company->subscription->subscription_amount}}
+                    </p>
+                    <hr>
+                </div>
+            </div>
+            
             <strong></i>Dokumen</strong>
             <p class="text-muted">
             @if ($company->documents)

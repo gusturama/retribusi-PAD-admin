@@ -24,7 +24,7 @@
 @endif
 
     <form method="POST" enctype="multipart/form-data" action="{{ route('pemilik-usaha-update', $user->id) }}">
-      <div class="foto-profil text-center mb-2">
+      {{-- <div class="foto-profil text-center mb-2">
         @if ($user->photo)
             @if (str_contains($user->photo, 'http','https') == true)
               <img style="width: 200px; height:200px;" src="{{$user->photo}}" class="img-thumbnail rounded" alt="foto user">
@@ -34,7 +34,7 @@
         @else
         <img style="width: 200px; height:200px;" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" class="img-thumbnail rounded" alt="foto user">
         @endif
-      </div>
+      </div> --}}
 
       @csrf
       <div class="card-body">
@@ -46,34 +46,55 @@
           <label>Email</label>
           <input type="email" name="email" class="form-control" value="{{$user->email}}" required="required">
         </div>
-        <div class="form-group">
-          <label>Nomor HP</label>
-          <input type="text" name="no_hp" class="form-control" value="{{$user->phone}}" required="required">
+
+        <div class="row">
+          <div class="col-md">
+            
+          </div>
         </div>
 
-      <div class="form-group">
-          <label for="exampleFormControlFile1">Ubah Foto Profil (opsional)</label>
-          
-            <div class="foto-profil text-center">
-              @if ($user->photo)
-                  @if (str_contains($user->photo, 'http','https') == true)
-                    <img style="width: 200px; height:200px;" src="{{$user->photo}}" class="img-thumbnail rounded" alt="foto user">
-                  @else
-                    <img style="width: 200px; height:200px;" src="{{asset('storage/'. $user->photo)}}" class="img-thumbnail rounded" alt="foto aset">
-                  @endif
-              @else
-              <img style="width: 200px; height:200px;" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" class="img-thumbnail rounded" alt="foto user">
-              @endif
-            </div>
+        <div class="row">
 
-          
-          <div class="input-group">
-              <div class="custom-file">
-                <input type="file" name="foto" class="custom-file-input" id="foto" onchange="previewImage()">
-                <label class="custom-file-label" for="inputGroupFile01">Pilih file</label>
+          <div class="col-md">
+            <div class="form-group">
+              <label>Nomor HP</label>
+              <input type="text" name="no_hp" class="form-control" value="{{$user->phone}}" required="required">
+            </div>
+          </div>
+
+          <div class="col-md">
+
+            <div class="form-group">
+              <label for="exampleFormControlFile1">Ubah Foto Profil (opsional)</label>
+              
+                
+    
+              
+              <div class="input-group">
+                  <div class="custom-file">
+                    <input type="file" name="foto" class="custom-file-input" id="foto" onchange="previewImage()">
+                    <label class="custom-file-label" for="inputGroupFile01">Pilih file</label>
+                  </div>
+              </div>
+
+              <div class="foto-profil">
+                @if ($user->photo)
+                    @if (str_contains($user->photo, 'http','https') == true)
+                      <img style="width: 200px; height:200px;" src="{{$user->photo}}" class="img-thumbnail img-preview rounded" alt="foto user">
+                    @else
+                      <img style="width: 200px; height:200px;" src="{{asset('storage/'. $user->photo)}}" class="img-preview img-thumbnail rounded" alt="foto aset">
+                    @endif
+                @else
+                <img style="width: 200px; height:200px;" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" class="img-preview img-thumbnail rounded" alt="foto user">
+                @endif
               </div>
           </div>
-      </div>
+
+          </div>
+
+        </div>
+
+      
       </div>
       <!-- /.card-body -->
 
