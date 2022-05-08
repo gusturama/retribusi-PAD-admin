@@ -15,7 +15,7 @@ class CompanyScale extends Model
     ];
 
 
-public function subscriptions()
+    public function subscriptions()
     {
         return $this->hasMany(Subscription::class);
     }

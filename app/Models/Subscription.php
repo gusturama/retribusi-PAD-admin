@@ -18,9 +18,9 @@ class Subscription extends Model
         return $this->hasMany(Company::class);
     }
 
-    public function company_scale()
+    public function company_type()
     {
-        return $this->belongsTo(CompanyScale::class);
+        return $this->belongsTo(CompanyType::class);
     }
 
     public function subscription_type()

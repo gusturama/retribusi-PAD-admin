@@ -194,12 +194,6 @@
                                     <p>Jenis Usaha</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="/skala-usaha" class="nav-link {{ Request::is('skala-usaha*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-store"></i>
-                                    <p>Skala Usaha</p>
-                                    </a>
-                                </li>
 
                                 <li class="nav-item">
                                     <a href="/banjar" class="nav-link {{ Request::is('banjar*', 'tempekan*') ? 'active' : '' }}">

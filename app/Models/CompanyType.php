@@ -20,4 +20,9 @@ class CompanyType extends Model
     {
         return $this->hasMany(Company::class);
     }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
 }

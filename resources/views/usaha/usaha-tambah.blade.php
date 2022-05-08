@@ -148,16 +148,7 @@
                     </select>
                   </div>
             </div>
-            <div class="col-md">
-                <div class="form-group">
-                    <label>Skala Usaha</label>
-                    <select name="skala" class="custom-select form-control-border" id="exampleSelectBorder" required="required">
-                        @foreach ($company_scales as $comp_scale)
-                            <option value="{{$comp_scale->id}}">{{$comp_scale->scale}}</option>
-                        @endforeach
-                    </select>
-                  </div>
-            </div>
+            
         </div>
 
         <div class="form-group">

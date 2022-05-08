@@ -174,18 +174,6 @@
                     </select>
                   </div>
             </div>
-            <div class="col-md">
-                <div class="form-group">
-                    <label>Skala Usaha</label>
-                    <select name="skala" class="custom-select form-control-border" id="exampleSelectBorder" required="required">
-                        @foreach ($company_scales as $comp_scale)
-                            <option value="{{$comp_scale->id}}" @if ($comp_scale->id == $company->subscription->company_scale->id)
-                                selected
-                            @endif>{{$comp_scale->scale}}</option>
-                        @endforeach
-                    </select>
-                  </div>
-            </div>
         </div>
 
         <div class="form-group">
@@ -202,7 +190,7 @@
                             <a target="_blank" href="{{$company->documents}}" class="btn btn-outline-secondary"> Unduh File</a>
                         @else
                         {{-- <img src="{{asset('storage/'. $company->documents)}}" class="img-thumbnail rounded" alt="..." width="30%"> --}}
-                        <a href="{{asset('storage/'.$company->documents)}}" class="btn btn-outline-secondary"></a>
+                        <a href="{{asset('storage/'.$company->documents)}}" class="btn btn-outline-secondary">Unduh File</a>
 
                         @endif
                     @else

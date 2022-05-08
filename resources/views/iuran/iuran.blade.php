@@ -38,7 +38,7 @@
         <thead>
         <tr>
             <th>No.</th>
-            <th>Skala Usaha</th>
+            <th>Jenis Usaha</th>
             <th>Jenis Iuran</th>
             <th>Jumlah Iuran</th>
             <th class="text-center">Aksi</th>
@@ -51,7 +51,7 @@
         @foreach($subs as $sub)
         <tr>   
             <td>{{ $i++ }}</td>
-            <td>{{ $sub->company_scale->scale}}</td>
+            <td>{{ $sub->company_type->type}}</td>
             <td>{{ $sub->subscription_type->category}}</td>
             <td>{{ $sub->subscription_amount }}</td>
             <td class="text-center fit">

@@ -62,11 +62,10 @@ class CompanyController extends Controller
             'foto' => 'image|file|max:2048',
             'lat'=> 'required',
             'lng'=> 'required',
-            'skala'=> 'required',
             'kategori'=> 'required',
         ]);
 
-        $subs = Subscription::where('subscription_type_id', $request->kategori)->where('company_scale_id', $request->skala)->first();
+        $subs = Subscription::where('subscription_type_id', $request->kategori)->where('company_type_id', $request->kategori)->first();
         
         // echo($subs->id);
         // dd($request);
@@ -159,13 +158,12 @@ class CompanyController extends Controller
         'foto' => 'image|file|max:2048',
         'lat'=> 'required',
         'lng'=> 'required',
-        'skala'=> 'required',
         'status'=>'required',
         'kategori'=> 'required',
         ]);
 
         $comp = Company::find($id);
-        $subs = Subscription::where('subscription_type_id', $request->kategori)->where('company_scale_id', $request->skala)->first();
+        $subs = Subscription::where('subscription_type_id', $request->kategori)->where('company_type_id', $request->jenis_usaha)->first();
         
         // echo($subs->id);
         // dd($request);
@@ -191,7 +189,6 @@ class CompanyController extends Controller
             $unpaid = CompaniesUnpaidTransaction::create([
                 "company_id" => $comp->id,
                 "subscription_type_id" => $comp->subscription->subscription_type->id,
-                "company_scale_id" => $comp->subscription->company_scale->id,
                 "amount" => $comp->subscription->subscription_amount,
                 "unpaid_at" => Carbon::now(),
             ]);

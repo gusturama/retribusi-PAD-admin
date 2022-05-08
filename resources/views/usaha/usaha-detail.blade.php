@@ -109,13 +109,6 @@
                     </p>
                     <hr>
                 </div>
-                <div class="col-md">
-                    <strong></i>Skala Usaha</strong>
-                    <p class="text-muted">
-                        {{$company->subscription->company_scale->scale}}
-                    </p>
-                    <hr>
-                </div>
             </div>
             
             <div class="row">
@@ -162,7 +155,7 @@
                     <a target="_blank" href="{{$company->documents}}" class="btn btn-outline-secondary"> Unduh File</a>
                 @else
                 {{-- <img src="{{asset('storage/'. $company->documents)}}" class="img-thumbnail rounded" alt="..." width="30%"> --}}
-                <a href="{{asset('storage/'.$company->documents)}}" class="btn btn-outline-secondary"></a>
+                <a href="{{asset('storage/'.$company->documents)}}" class="btn btn-outline-secondary"> Unduh File</a>
 
                 @endif
             @else
