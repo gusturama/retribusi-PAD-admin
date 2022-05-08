@@ -58,7 +58,7 @@ class StaffController extends Controller
             $foto = $request->file('foto')->store('user-photos');
         }
 
-        $password = Hash::make($request->newPassword);
+        $password = Hash::make($request->password);
 
         $user = User::create([
             "name" => $request->nama,

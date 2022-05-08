@@ -196,17 +196,20 @@
         <div class="row">
             <div class="col-md">
                 <div class="form-group">
-                    <label for="exampleFormControlFile1">Dokumen</label>
+                    <label for="exampleFormControlFile1">Dokumen</label><br>
                     @if ($company->documents)
                         @if (str_contains($company->documents, 'http','https') == true)
-                            <img src="{{$company->documents}}" class="img-fluid doc-preview mb-2 d-block" alt="..." width="30%">
+                            <a target="_blank" href="{{$company->documents}}" class="btn btn-outline-secondary"> Unduh File</a>
                         @else
-                        <img src="{{asset('storage/'. $company->documents)}}" class="img-fluid doc-preview mb-2 d-block" alt="..." width="30%">
+                        {{-- <img src="{{asset('storage/'. $company->documents)}}" class="img-thumbnail rounded" alt="..." width="30%"> --}}
+                        <a href="{{asset('storage/'.$company->documents)}}" class="btn btn-outline-secondary"></a>
+
                         @endif
                     @else
-                    <img src="https://media.istockphoto.com/vectors/contract-or-document-signing-icon-document-folder-with-stamp-and-text-vector-id1179640294?k=20&m=1179640294&s=612x612&w=0&h=O2IBtlV52-6gWSAeyozPIFkfZ-LzHnpXBw2tOuUToj8=" class="img-fluid doc-preview mb-2 d-block" alt="..." width="30%">
+                    dokumen usaha belum diupload
                     @endif
                     {{-- <img  src="" alt="" class="img-fluid doc-preview mb-2"> --}}
+                    <br>
                     <div class="input-group">
                         <div class="custom-file">
                           <input name="dokumen" type="file" class="custom-file-input"  id="dok" onchange="previewDocument()">
