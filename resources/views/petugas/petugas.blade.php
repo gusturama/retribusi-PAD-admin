@@ -24,6 +24,7 @@
 <div class="card">
     <div class="card-body">
         <a href="/petugas-tambah" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Data</a>
+        <a href="{{ route('petugas-sampah') }}" class="btn btn-danger"><i class="fa fa-trash"></i> Tempat Sampah</a>
         <table id="example1" class="table table-bordered table-hover">
         <thead>
         <tr>

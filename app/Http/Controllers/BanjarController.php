@@ -125,4 +125,41 @@ class BanjarController extends Controller
         return redirect()->route('banjar-index')
             ->with('success', 'Banjar Berhasil Dihapus');
     }
+
+    public function trash()
+    {
+        $title = "Banjar Terhapus";
+        $sampahs = Banjar::onlyTrashed()->get();
+        return view('banjar.banjar-sampah', compact('sampahs', 'title'));
+    }
+
+    public function restore($id)
+    {
+        $banjar = Banjar::onlyTrashed()->where('id', $id);
+        $banjar->restore();
+        return redirect()->route('banjar-sampah');
+    }
+
+    public function restore_all()
+    {
+        $banjar = Banjar::onlyTrashed();
+        $banjar->restore();
+        return redirect()->route('banjar-sampah');
+
+    }
+
+    public function force_delete($id)
+    {
+        $banjar = Banjar::onlyTrashed()->where('id', $id);
+        $banjar->forceDelete();
+        return redirect()->route('banjar-sampah');
+    }
+
+    public function force_delete_all()
+    {
+        $banjar = Banjar::onlyTrashed();
+        $banjar->forceDelete();
+        return redirect()->route('banjar-sampah');
+
+    }
 }

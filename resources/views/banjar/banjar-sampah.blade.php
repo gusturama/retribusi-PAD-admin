@@ -30,8 +30,9 @@
 <div class="card">
 
     <div class="card-body">
-        <a href="{{ route('banjar-tambah') }}" class="btn btn-success mb-2"><i class="fa fa-plus"></i> Tambah Data</a> | 
-        {{-- <a href="{{ route('banjar-sampah') }}" class="btn btn-danger mb-2"><i class="fa fa-trash"></i> Tempat Sampah</a> --}}
+        <a href="/banjar" class="btn btn-primary"><i class="fa"></i> Kembali</a> 
+        <a href="{{ route('banjar-restore-all') }}" class="btn btn-success" onclick="return confirm('Anda yakin restore semua data dari sampah?')"> Restore Semua</a>
+        <a href="{{ route('banjar-force-delete-all') }}" class="btn btn-danger" onclick="return confirm('Anda yakin menghapus semua data di sampah secara permanen?')" > Hapus Permanen Semua</a>
         <table id="example1" class="table table-bordered table-hover">
         <thead>
         <tr>
@@ -45,15 +46,14 @@
         @php
             $i = 1;
        @endphp
-        @foreach($banjars as $banjar)
+        @foreach($sampahs as $sampah)
         <tr>   
             <td>{{ $i++ }}</td>
-            <td>{{ $banjar->name }}</td>
-            <td>{{ $banjar->address }}</td>
+            <td>{{ $sampah->name }}</td>
+            <td>{{ $sampah->address }}</td>
             <td class="text-center fit">
-                {{-- <a href="{{ route('banjar-detail', $banjar->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Lihat Detail"><span class="fas fa-eye"></span></a> --}}
-                <a href="{{ route('banjar-edit', $banjar->id) }}" class="btn btn-warning"  data-toggle="tooltip" data-placement="top" title="Edit"><span class="fas fa-pencil-alt"></span></a>
-                <a href="{{ route('banjar-hapus', $banjar->id) }}" class="btn btn-danger" onclick="return confirm('Anda yakin menghapus data ini?')" data-toggle="tooltip" data-placement="top" title="Hapus"><span class="fas fa-trash"></span></a>
+                <a href="{{ route('banjar-restore', $sampah->id) }}" class="btn btn-success" onclick="return confirm('Anda yakin restore data dari sampah?')">Restore</a>
+                <a href="{{ route('banjar-force-delete', $sampah->id) }}" class="btn btn-danger" onclick="return confirm('Anda yakin menghapus data ini?')">Hapus Permanen</a>
             </td>
         </tr>
         @endforeach

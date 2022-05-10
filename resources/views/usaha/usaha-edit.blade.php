@@ -130,7 +130,7 @@
               @foreach ($owners as $owner)
                   <option value="{{$owner->id}}" @if ($company->user->id == $owner->id)
                       selected
-                  @endif>{{$owner->name}}</option>
+                  @endif>{{$owner['name']}}</option>
               @endforeach
             </select>
         </div>
@@ -154,7 +154,7 @@
                         @foreach ($banjars as $banjar)
                             <option value="{{$banjar->id}}" @if ($banjar->id == $company->banjar['id'])
                                 selected
-                            @endif>{{$banjar->name}}</option>
+                            @endif>{{$banjar['name']}}</option>
                         @endforeach
                     </select>
                   </div>
@@ -169,7 +169,7 @@
                         @foreach ($subscription_types as $subs_type)
                             <option value="{{$subs_type->id}}" @if ($subs_type->id == $company->subscription->subscription_type->id)
                                 selected
-                            @endif> {{$subs_type->category}}</option>
+                            @endif> {{$subs_type['category']}}</option>
                         @endforeach
                     </select>
                   </div>

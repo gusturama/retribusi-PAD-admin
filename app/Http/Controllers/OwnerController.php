@@ -142,5 +142,45 @@ class OwnerController extends Controller
         User::find($id)->delete();
         return redirect()->route('pemilik-usaha-index')
             ->with('success', 'Pemilik Usha Berhasil Dihapus');
+
+        // otomatis softdelete usaha yang dimiliki
+        Company::where('user_id', $id)->delete();
+    }
+    
+    public function trash()
+    {
+        $title = "Pemilik Usaha Terhapus";
+        $owners = User::where('role', 'owner')->onlyTrashed()->get();
+        return view('pemilik-usaha.pemilik-usaha-sampah', compact('owners', 'title'));
+    }
+
+    public function restore($id)
+    {
+        $user = User::onlyTrashed()->where('id', $id);
+        $user->restore();
+        return redirect()->route('pemilik-usaha-sampah');
+    }
+
+    public function restore_all()
+    {
+        $user = User::onlyTrashed()->where('role', 'owner');
+        $user->restore();
+        return redirect()->route('pemilik-usaha-sampah');
+
+    }
+
+    public function force_delete($id)
+    {
+        $user = User::onlyTrashed()->where('id', $id);
+        $user->forceDelete();
+        return redirect()->route('pemilik-usaha-sampah');
+    }
+
+    public function force_delete_all()
+    {
+        $user = User::onlyTrashed()->where('role', 'owner');
+        $user->forceDelete();
+        return redirect()->route('pemilik-usaha-sampah');
+
     }
 }

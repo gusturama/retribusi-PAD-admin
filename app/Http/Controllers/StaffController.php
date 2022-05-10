@@ -46,7 +46,7 @@ class StaffController extends Controller
         $validated = $request->validate([
             'nama' => 'required',
             'email' => 'required',
-            'no_hp'=> 'required',
+            'no_hp'=> 'required|unique:users,phone',
             'password'=> 'required',
             'banjar' => 'required',
             'foto' => 'image|file|max:2048'
@@ -118,7 +118,7 @@ class StaffController extends Controller
         $validated = $request->validate([
             'nama' => 'required',
             'email' => 'required',
-            'no_hp'=> 'required',
+            'no_hp'=> 'required|unique:users,phone',
             'banjar' => 'required',
             'foto' => 'image|file|max:2048'
         ]);
@@ -159,5 +159,50 @@ class StaffController extends Controller
         User::find($id)->delete();
         return redirect()->route('petugas-index')
             ->with('success', 'Petugas Berhasil Dihapus');
+    }
+
+    public function trash()
+    {
+        $title = "Petugas Terhapus";
+        $staffs = User::where('role', 'staff')->onlyTrashed()->get();
+        return view('petugas.petugas-sampah', compact('staffs', 'title'));
+    }
+
+    public function restore($id)
+    {
+        $staff = Staff::onlyTrashed()->where('user_id', $id);
+        $staff->restore();
+        $user = User::onlyTrashed()->where('id', $id);
+        $user->restore();
+        return redirect()->route('petugas-sampah');
+    }
+
+    public function restore_all()
+    {
+        $staff = Staff::onlyTrashed();
+        $staff->restore();
+        $user = User::onlyTrashed()->where('role', 'staff');
+        $user->restore();
+        return redirect()->route('petugas-sampah');
+
+    }
+
+    public function force_delete($id)
+    {
+        $staff = Staff::onlyTrashed()->where('user_id', $id);
+        $staff->forceDelete();
+        $user = User::onlyTrashed()->where('id', $id);
+        $user->forceDelete();
+        return redirect()->route('petugas-sampah');
+    }
+
+    public function force_delete_all()
+    {
+        $staff = Staff::onlyTrashed();
+        $staff->forceDelete();
+        $user = User::onlyTrashed()->where('role', 'staff');
+        $user->forceDelete();
+        return redirect()->route('petugas-sampah');
+
     }
 }

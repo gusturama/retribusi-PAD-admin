@@ -203,8 +203,8 @@
       <!-- /.card-body -->
 
       {{-- input lokasi --}}
-      <input type="hidden" name="lat" value="" id="lat"> 
-      <input type="hidden" name="lng" value="" id="lng"> 
+      <input type="hidden" name="lat" value="-8.654627812853127" id="lat"> 
+      <input type="hidden" name="lng" value="115.18781245268403" id="lng"> 
 
 
       <div class="card-footer">

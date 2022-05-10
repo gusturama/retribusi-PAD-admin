@@ -94,7 +94,10 @@
                 <div class="col-md">
                     <strong></i>Nama Pemilik</strong>
                     <p class="text-muted">
-                        {{$company->user->name}} 
+                        @if ($company->user['name'] == null)
+                            Data Pemilik Usaha berada di sampah (terhapus) 
+                        @endif
+                        {{$company->user['name']}} 
                     </p>
                     <hr>
                     

@@ -26,6 +26,7 @@
 <div class="card">
     <div class="card-body">
         <a href="/usaha-tambah" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Data</a>
+        <a href="{{ route('usaha-sampah') }}" class="btn btn-danger"><i class="fa fa-trash"></i> Tempat Sampah</a>
         <table id="example1" class="table table-bordered table-hover">
         <thead>
         <tr>
@@ -45,7 +46,11 @@
         <tr>
             {{-- <td>{{$i++}}</td> --}}
             <td>{{$company->name}}</td>
-            <td>{{$company->user->name}}</td>
+            <td>
+            @if ($company->user['name'] == null)
+                Data Pemilik Usaha berada di sampah (terhapus) 
+            @endif
+            {{$company->user['name']}} </td>
             <td>
                 @if ($company->banjar['name'] == null)
                 Belum dipilih

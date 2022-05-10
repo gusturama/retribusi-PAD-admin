@@ -60,6 +60,12 @@ Route::middleware('auth')->group(function(){
     Route::get('/usaha-edit/{id}', [CompanyController::class, 'edit'])->name('usaha-edit');
     Route::post('/usaha-update/{id}', [CompanyController::class, 'update'])->name('usaha-update');
     Route::get('/usaha-delete/{id}', [CompanyController::class, 'destroy'])->name('usaha-hapus');
+    Route::get('/usaha-sampah', [CompanyController::class, 'trash'])->name('usaha-sampah');
+    Route::get('/usaha-restore-all', [CompanyController::class, 'restore_all'])->name('usaha-restore-all');
+    Route::get('/usaha-restore/{id}', [CompanyController::class, 'restore'])->name('usaha-restore');
+    Route::get('/usaha-force-delete-all', [CompanyController::class, 'force_delete_all'])->name('usaha-force-delete-all');
+    Route::get('/usaha-force-delete/{id}', [CompanyController::class, 'force_delete'])->name('usaha-force-delete');
+
 
     // pemilik usaha / owner
     Route::get('/pemilik-usaha', [OwnerController::class, 'index'])->name('pemilik-usaha-index');
@@ -69,6 +75,11 @@ Route::middleware('auth')->group(function(){
     Route::get('/pemilik-usaha-edit/{id}', [OwnerController::class, 'edit'])->name('pemilik-usaha-edit');
     Route::post('/pemilik-usaha-update/{id}', [OwnerController::class, 'update'])->name('pemilik-usaha-update');
     Route::get('/pemilik-usaha-delete/{id}', [OwnerController::class, 'destroy'])->name('pemilik-usaha-hapus');
+    Route::get('/pemilik-usaha-sampah', [OwnerController::class, 'trash'])->name('pemilik-usaha-sampah');
+    Route::get('/pemilik-usaha-restore-all', [OwnerController::class, 'restore_all'])->name('pemilik-usaha-restore-all');
+    Route::get('/pemilik-usaha-restore/{id}', [OwnerController::class, 'restore'])->name('pemilik-usaha-restore');
+    Route::get('/pemilik-usaha-force-delete-all', [OwnerController::class, 'force_delete_all'])->name('pemilik-usaha-force-delete-all');
+    Route::get('/pemilik-usaha-force-delete/{id}', [OwnerController::class, 'force_delete'])->name('pemilik-usaha-force-delete');
 
     // petugas / staff
     Route::get('/petugas', [StaffController::class, 'index'])->name('petugas-index');
@@ -78,6 +89,11 @@ Route::middleware('auth')->group(function(){
     Route::get('/petugas-edit/{id}', [StaffController::class, 'edit'])->name('petugas-edit');
     Route::post('/petugas-update/{id}', [StaffController::class, 'update'])->name('petugas-update');
     Route::get('/petugas-delete/{id}', [StaffController::class, 'destroy'])->name('petugas-hapus');
+    Route::get('/petugas-sampah', [StaffController::class, 'trash'])->name('petugas-sampah');
+    Route::get('/petugas-restore-all', [StaffController::class, 'restore_all'])->name('petugas-restore-all');
+    Route::get('/petugas-restore/{id}', [StaffController::class, 'restore'])->name('petugas-restore');
+    Route::get('/petugas-force-delete-all', [StaffController::class, 'force_delete_all'])->name('petugas-force-delete-all');
+    Route::get('/petugas-force-delete/{id}', [StaffController::class, 'force_delete'])->name('petugas-force-delete');
 
 
 
@@ -89,6 +105,13 @@ Route::middleware('auth')->group(function(){
     Route::post('/banjar-store', [BanjarController::class, 'store'])->name('banjar-store');
     Route::post('/banjar-update/{id}', [BanjarController::class, 'update'])->name('banjar-update');
     Route::get('/banjar-delete/{id}', [BanjarController::class, 'destroy'])->name('banjar-hapus');
+    Route::get('/banjar-sampah', [BanjarController::class, 'trash'])->name('banjar-sampah');
+    Route::get('/banjar-restore-all', [BanjarController::class, 'restore_all'])->name('banjar-restore-all');
+    Route::get('/banjar-restore/{id}', [BanjarController::class, 'restore'])->name('banjar-restore');
+    Route::get('/banjar-force-delete-all', [BanjarController::class, 'force_delete_all'])->name('banjar-force-delete-all');
+    Route::get('/banjar-force-delete/{id}', [BanjarController::class, 'force_delete'])->name('banjar-force-delete');
+
+
 
     // tempekan
     Route::get('/tempekan-tambah/{id}', [TempekanController::class, 'create'])->name('tempekan-tambah');

@@ -227,4 +227,41 @@ class CompanyController extends Controller
         return redirect()->route('usaha-index')
             ->with('success', 'Pemilik Usha Berhasil Dihapus');
     }
+
+    public function trash()
+    {
+        $title = "Usaha Terhapus";
+        $comps = Company::onlyTrashed()->get();
+        return view('usaha.usaha-sampah', compact('comps', 'title'));
+    }
+
+    public function restore($id)
+    {
+        $comp = Company::onlyTrashed()->where('id', $id);
+        $comp->restore();
+        return redirect()->route('pemilik-usaha-sampah');
+    }
+
+    public function restore_all()
+    {
+        $user = User::onlyTrashed()->where('role', 'owner');
+        $user->restore();
+        return redirect()->route('pemilik-usaha-sampah');
+
+    }
+
+    public function force_delete($id)
+    {
+        $user = User::onlyTrashed()->where('id', $id);
+        $user->forceDelete();
+        return redirect()->route('pemilik-usaha-sampah');
+    }
+
+    public function force_delete_all()
+    {
+        $user = User::onlyTrashed()->where('role', 'owner');
+        $user->forceDelete();
+        return redirect()->route('pemilik-usaha-sampah');
+
+    }
 }

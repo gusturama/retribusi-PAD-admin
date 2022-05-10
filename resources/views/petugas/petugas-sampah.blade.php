@@ -22,15 +22,15 @@
 @section('content')
 
 <div class="card">
-    
     <div class="card-body">
-        <a href="/pemilik-usaha-tambah" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Data</a>
-        <a href="{{ route('pemilik-usaha-sampah') }}" class="btn btn-danger"><i class="fa fa-trash"></i> Tempat Sampah</a>
+        <a href="/petugas" class="btn btn-primary"><i class="fa"></i> Kembali</a> 
+        <a href="{{ route('petugas-restore-all') }}" class="btn btn-success" onclick="return confirm('Anda yakin restore semua data dari sampah?')"> Restore Semua</a>
+        <a href="{{ route('petugas-force-delete-all') }}" class="btn btn-danger" onclick="return confirm('Anda yakin menghapus semua data di sampah secara permanen?')" > Hapus Permanen Semua</a>
         <table id="example1" class="table table-bordered table-hover">
         <thead>
         <tr>
             <th>No</th>
-            <th>Nama</th>
+            <th>Nama Petugas</th>
             <th>Email</th>
             <th>No HP</th>
             <th class="text-center">Aksi</th>
@@ -40,17 +40,16 @@
         @php
         $i = 1;
         @endphp
-        @foreach($owners as $owner)
+        @foreach($staffs as $user)
         <tr>   
             <td>{{ $i++ }}</td>
-            <td>{{ $owner->name }}</td>
-            <td>{{ $owner->email }}</td>
-            <td>{{ $owner->phone }}</td>
+            <td>{{ $user->name }}</td>
+            <td>{{ $user->email }}</td>
+            <td>{{ $user->phone }}</td>
             
             <td class="text-center fit">
-                <a href="{{ route('pemilik-usaha-detail', $owner->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Lihat Detail"><span class="fas fa-eye"></span></a>
-                <a href="{{ route('pemilik-usaha-edit', $owner->id) }}" class="btn btn-warning"  data-toggle="tooltip" data-placement="top" title="Edit"><span class="fas fa-pencil-alt"></span></a>
-                <a href="{{ route('pemilik-usaha-hapus', $owner->id) }}" class="btn btn-danger" onclick="return confirm('Anda yakin menghapus data ini?')" data-toggle="tooltip" data-placement="top" title="Hapus"><span class="fas fa-trash"></span></a>
+                <a href="{{ route('petugas-restore', $user->id) }}" class="btn btn-success" onclick="return confirm('Anda yakin restore data dari sampah?')">Restore</a>
+                <a href="{{ route('petugas-force-delete', $user->id) }}" class="btn btn-danger" onclick="return confirm('Anda yakin menghapus data ini?')">Hapus Permanen</a>
             </td>
         </tr>
         @endforeach
